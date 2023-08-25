@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@solidjs/router": "^0.8.3",
     "solid-js": "^1.7.11"
