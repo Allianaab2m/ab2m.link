@@ -1,35 +1,27 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "es5",
-    "module": "ESNext",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
     "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
-    "moduleResolution": "node",
-    "newLine": "lf",
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "resolveJsonModule": true,
-    "types": [
-      "vite/client",
-      "unplugin-icons/types/solid"
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
     ],
-    "skipLibCheck": true,
-    "strict": true
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
 }
