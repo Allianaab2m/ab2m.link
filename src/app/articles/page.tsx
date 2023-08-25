@@ -67,6 +67,7 @@ export default async function Articles() {
         {data.articles.map((a) =>
           <ArticleCard
             data={a}
+            key={a.slug}
           />)}
       </div>
     </div>
