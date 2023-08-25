@@ -76,14 +76,13 @@ export default async function Notes() {
         <h2 className="text-lg"><a href="https://micolor.link" className="link">MiColor.link</a>と<a href="https://misskey.backspace.fm" className="link">Backspacekey</a>で行っている私のパブリック投稿のうち最新のものを取得しています．</h2>
         <div className="divider mb-2" />
         {notes.map(n =>
-          <PopupMotionWrapperLi>
+          <PopupMotionWrapperLi key={n.id}>
             <NoteCard
               id={n.id}
               text={n.text}
               createdAt={n.createdAt}
               host={n.host}
               username={n.username}
-              key={n.id}
             />
           </PopupMotionWrapperLi>
         )}

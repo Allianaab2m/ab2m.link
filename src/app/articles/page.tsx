@@ -68,10 +68,9 @@ export default async function Articles() {
       <div className="mx-auto px-4 mt-4 container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {data.articles.map((a) =>
-            <PopupMotionWrapperLi>
+            <PopupMotionWrapperLi key={a.slug}>
               <ArticleCard
                 data={a}
-                key={a.slug}
               />
             </PopupMotionWrapperLi>)}
         </div>
