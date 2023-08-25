@@ -1,20 +1,15 @@
-module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   plugins: [require("daisyui")],
-  theme: {
-    extend: {
-      fontFamily: {
-        plexjp: ["IBM Plex Sans JP"],
-      },
-    },
-  },
   daisyui: {
     themes: [
       {
-        dark: {
-          ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
-          "primary": "#B5CDF3",
-        },
         myTheme: {
           "primary": "#B5CDF3",
           "secondary": "#5B6E7F",
@@ -30,3 +25,4 @@ module.exports = {
     ],
   },
 };
+export default config;
