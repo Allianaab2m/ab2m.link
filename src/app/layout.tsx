@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 import { IBM_Plex_Sans_JP } from 'next/font/google'
 import Footer from '@/components/Footer'
 
-const plexjp = IBM_Plex_Sans_JP({ weight: ["100", "200", "300", "400", "500", "600", "700"], preload: false })
+const plexjp = IBM_Plex_Sans_JP({ weight: ["400", "700"], preload: false })
 
 export const metadata: Metadata = {
   title: 'ab2m.link',
