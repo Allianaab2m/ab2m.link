@@ -1,5 +1,6 @@
 import { MaterialSymbolsFavorite } from "@/components/logos/favorite";
 import { SimpleIconsZenn } from "@/components/logos/zenn";
+import MotionWrapper, { AnimatePresenceWrapper, PopupMotionWrapperLi } from "@/components/motionWrapper";
 
 export type ZennArticleData = {
   id: number;
@@ -59,17 +60,22 @@ function ArticleCard(props: { data: ZennArticleData, className?: string }) {
   )
 }
 
+
 export default async function Articles() {
   const data: { articles: ZennArticleData[] } = await fetchArticleData()
   return (
-    <div className="mx-auto px-4 mt-4 container">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {data.articles.map((a) =>
-          <ArticleCard
-            data={a}
-            key={a.slug}
-          />)}
+    <AnimatePresenceWrapper>
+      <div className="mx-auto px-4 mt-4 container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {data.articles.map((a) =>
+            <PopupMotionWrapperLi>
+              <ArticleCard
+                data={a}
+                key={a.slug}
+              />
+            </PopupMotionWrapperLi>)}
+        </div>
       </div>
-    </div>
+    </AnimatePresenceWrapper>
   )
 }

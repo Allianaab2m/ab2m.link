@@ -1,3 +1,5 @@
+import { AnimatePresenceWrapper, PopupMotionWrapperLi } from "@/components/motionWrapper"
+
 type MisskeyNote = {
   id: string
   user: {
@@ -68,19 +70,24 @@ export default async function Notes() {
     return 0
   })
   return (
-    <div className="mx-auto px-4 mt-4 container">
-      <h2 className="text-lg">深夜テンションのノリ<a href="https://misskey.backspace.fm/notes/9iuh2mjty3" className="link">(元凶)</a>で出来たページです．</h2>
-      <h2 className="text-lg"><a href="https://micolor.link" className="link">MiColor.link</a>と<a href="https://misskey.backspace.fm" className="link">Backspacekey</a>で行っている私のパブリック投稿のうち最新のものを取得しています．</h2>
-      <div className="divider mb-2" />
-      {notes.map(n =>
-        <NoteCard
-          id={n.id}
-          text={n.text}
-          createdAt={n.createdAt}
-          host={n.host}
-          username={n.username}
-          key={n.id}
-        />)}
-    </div>
+    <AnimatePresenceWrapper>
+      <div className="mx-auto px-4 mt-4 container">
+        <h2 className="text-lg">深夜テンションのノリ<a href="https://misskey.backspace.fm/notes/9iuh2mjty3" className="link">(元凶)</a>で出来たページです．</h2>
+        <h2 className="text-lg"><a href="https://micolor.link" className="link">MiColor.link</a>と<a href="https://misskey.backspace.fm" className="link">Backspacekey</a>で行っている私のパブリック投稿のうち最新のものを取得しています．</h2>
+        <div className="divider mb-2" />
+        {notes.map(n =>
+          <PopupMotionWrapperLi>
+            <NoteCard
+              id={n.id}
+              text={n.text}
+              createdAt={n.createdAt}
+              host={n.host}
+              username={n.username}
+              key={n.id}
+            />
+          </PopupMotionWrapperLi>
+        )}
+      </div>
+    </AnimatePresenceWrapper>
   )
 }
