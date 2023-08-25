@@ -5,11 +5,13 @@ import { Route, Router, Routes } from '@solidjs/router'
 
 render(() =>
 (
-  <Router>
-    <Routes>
-      <Route path="/" component={App} />
-    </Routes>
-  </Router>
+  <div class="font-plexjp">
+    <Router>
+      <Routes>
+        <Route path="/" component={App} />
+      </Routes>
+    </Router>
+  </div>
 ),
   document.getElementById('root')
 )

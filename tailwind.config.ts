@@ -1,12 +1,19 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   plugins: [require("daisyui")],
+  theme: {
+    extend: {
+      fontFamily: {
+        plexjp: ["IBM Plex Sans JP"],
+      },
+    },
+  },
   daisyui: {
     themes: [
       {
         dark: {
           ...require("daisyui/src/theming/themes")["[data-theme=dark]"],
-          "primary": "#B5CDF3"
+          "primary": "#B5CDF3",
         },
         myTheme: {
           "primary": "#B5CDF3",
@@ -17,9 +24,9 @@ module.exports = {
           "info": "#5C98F2",
           "success": "#739680",
           "warning": "#F2E1B3",
-          "error": "#F24F4F"
-        }
-      }
-    ]
-  }
+          "error": "#F24F4F",
+        },
+      },
+    ],
+  },
 };
