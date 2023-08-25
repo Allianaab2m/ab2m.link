@@ -37,7 +37,7 @@ async function fetchNoteData(host: string, uid: string) {
 
 function NoteCard(props: { id: string, text: string, createdAt: number, username: string, host: string, className?: string }) {
   const { id, text, createdAt, host, username, className } = props
-  const date = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
+  const date = new Date(createdAt + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
 
   return (
     <div className={className}>
