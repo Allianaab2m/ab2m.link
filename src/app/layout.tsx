@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { IBM_Plex_Sans_JP } from 'next/font/google'
+import Footer from '@/components/Footer'
 
 const plexjp = IBM_Plex_Sans_JP({ weight: ["100", "200", "300", "400", "500", "600", "700"], preload: false })
 
@@ -17,9 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja" data-theme="myTheme">
-      <body className={plexjp.className}>
+      <body className={`${plexjp.className} flex flex-col h-screen justify-between`}>
         <Navbar />
-        {children}
+        <div className="mb-auto">
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   )
