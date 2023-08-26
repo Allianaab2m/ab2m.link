@@ -1,16 +1,8 @@
-import { AnimatePresenceWrapper, PopupMotionWrapperLi } from "@/components/motionWrapper"
+// SSRしてるページ
 
-type MisskeyNote = {
-  id: string
-  user: {
-    username: string
-  }
-  createdAt: string
-  text: string | null
-  cw: string | null
-  visibility: "public" | "home" | "followers" | "specified"
-  localOnly: boolean
-}
+import { AnimatePresenceWrapper, PopupMotionWrapperLi } from "@/components/motionWrapper"
+import { MisskeyNote } from "@/types/notes/misskeyApi"
+import NoteCard from "@/components/notes/card"
 
 async function fetchNoteData(host: string, uid: string) {
   const res = await fetch(`https://${host}/api/users/notes`, {
@@ -37,30 +29,6 @@ async function fetchNoteData(host: string, uid: string) {
   return filteredNote
 }
 
-function NoteCard(props: { id: string, text: string, createdAt: number, username: string, host: string, className?: string }) {
-  const { id, text, createdAt, host, username, className } = props
-  const date = new Date(createdAt + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000));
-
-  return (
-    <div className={className}>
-      <div className="flex flex-col">
-        <div className="flex gap-1">
-          <a href={`https://${host}/notes/${id}`}>
-            <h2>{text}</h2>
-          </a>
-        </div>
-        <div className="text-sm text-neutral flex gap-1">
-          <p>{date.toLocaleString("ja-JP").slice(0, -3)}</p>
-          <a href={`https://${host}/@${username}`}>
-            <p>{`@${username}@${host}`}</p>
-          </a>
-        </div>
-      </div>
-      <div className="divider my-2" />
-    </div>
-  )
-}
-
 export default async function Notes() {
   const micolorNotes = await fetchNoteData("micolor.link", "9gy2bv66cy")
   const bskNotes = await fetchNoteData("misskey.backspace.fm", "9i1wds7o8e")
@@ -69,6 +37,7 @@ export default async function Notes() {
     if (a.createdAt < b.createdAt) return 1
     return 0
   })
+
   return (
     <AnimatePresenceWrapper>
       <div className="mx-auto px-4 mt-4 container">
@@ -77,13 +46,7 @@ export default async function Notes() {
         <div className="divider mb-2" />
         {notes.map(n =>
           <PopupMotionWrapperLi key={n.id}>
-            <NoteCard
-              id={n.id}
-              text={n.text}
-              createdAt={n.createdAt}
-              host={n.host}
-              username={n.username}
-            />
+            <NoteCard {...n} />
           </PopupMotionWrapperLi>
         )}
       </div>
