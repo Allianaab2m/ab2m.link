@@ -7,8 +7,8 @@ export default function ArticleCard(props: { data: ZennArticleData, className?: 
 
   return (
     <div className={props.className}>
-      <div className="rounded-md bg-base-200 p-4">
-        <a href={`https://zenn.dev${path}`}>
+      <a href={`https://zenn.dev${path}`}>
+        <div className="rounded-md bg-base-200 p-4">
           <div className="flex flex-col">
             <div className="flex gap-1">
               <SimpleIconsZenn className="mt-1" />
@@ -21,8 +21,8 @@ export default function ArticleCard(props: { data: ZennArticleData, className?: 
               <p>{liked_count}</p>
             </div>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
     </div>
   )
 }
