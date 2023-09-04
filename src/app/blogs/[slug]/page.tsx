@@ -1,18 +1,17 @@
-import fs from "fs"
-import { getSlugs, getPostDir } from "@/lib/blog"
-import { join } from "path"
+import { getSlugs, getPostData } from "@/lib/blog"
 import { cache } from "react"
 import compiler from "@/lib/compiler"
 import { JSDOM } from "jsdom"
 
 const fetchPost = cache(async (slug: string) => {
-  const post = fs.readFileSync(join(getPostDir(), `${slug}.mdx`), "utf-8")
-  return post
+  return getPostData(slug)
 })
 
 const BlogPage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params
-  const file = await fetchPost(slug)
+  const post = await fetchPost(slug)
+  const file = post.content
+  const data = post.data
 
   const lines = file.split("\n")
 
@@ -29,7 +28,7 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
       }
 
       const metas = doms.window.document.getElementsByTagName("meta")
-      metadata.title = doms.window.document.getElementsByTagName("title")[0].text
+      metadata.title = doms.window.document.getElementsByTagName("title")[0]?.text
 
       for (let i = 0; i < metas.length; i++) {
         let pro = metas[i].getAttribute("property")
@@ -70,6 +69,10 @@ const BlogPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="container px-4 mx-auto">
+      <h1 className="text-3xl font-bold">
+        {data.title}
+        <div className="divider my-0" />
+      </h1>
       {content}
     </div>
   )

@@ -15,7 +15,7 @@ export default async function Articles() {
   const data: { articles: ZennArticleData[] } = await fetchArticleData()
   return (
     <AnimatePresenceWrapper>
-      <div className="mx-auto px-4 mt-4 container">
+      <div className="mx-auto px-4 my-4 container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {
             data.articles.map((a) =>
