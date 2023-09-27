@@ -30,16 +30,12 @@ const Contact = () => {
           </div>
           <div className="space-y-4">
             <div>
-              <h2 className="text-xl"><a href="https://micolor.link/@alliana" className="link">@alliana@micolor.link</a></h2>
-              <p>鯖缶やってます．だいたいここにいます．</p>
-            </div>
-            <div>
               <h2 className="text-xl"><a href="https://misskey.backspace.fm/@alliana" className="link">@alliana@misskey.backspace.fm</a></h2>
               <p>フレンドがいるので作った．ニッチな技術系トークはここでよくやってます．</p>
             </div>
             <div>
               <h2 className="text-xl"><a href="https://misskey.io/@Alliana_ab2m" className="link">@Alliana_ab2m@misskey.io</a></h2>
-              <p>MiColorが落ちてるときなど，時々出没します．</p>
+              <p>最近は動かしてないです．</p>
             </div>
           </div>
         </div>

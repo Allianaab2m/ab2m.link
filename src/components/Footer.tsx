@@ -11,7 +11,7 @@ export default function Footer() {
         <p>Copyright © 2023 Alliana - All right reserved.</p>
       </div>
       <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-        <Link href="https://micolor.link/@alliana"><SimpleIconsMisskey className="h-6 w-6" /></Link>
+        <Link href="https://misskey.backspace.fm/@alliana"><SimpleIconsMisskey className="h-6 w-6" /></Link>
         <Link href="https://discord.com/users/271922478182301696"><IcBaselineDiscord className="h-6 w-6" /></Link>
         <Link href="https://github.com/Allianaab2m"><Fa6BrandsGithub className="h-6 w-6" /></Link>
         <Link href="https://twitter.com/ab2m_Alliana"><Fa6BrandsXTwitter className="h-6 w-6" /></Link>
