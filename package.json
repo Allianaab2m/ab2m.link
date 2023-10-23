@@ -1,29 +1,38 @@
 {
   "name": "ab2m.link",
-  "version": "0.1.0",
-  "private": true,
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@types/node": "20.5.6",
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.7",
-    "autoprefixer": "10.4.15",
-    "daisyui": "^3.6.3",
-    "eslint": "8.47.0",
-    "eslint-config-next": "13.4.19",
+    "@astrojs/mdx": "^1.1.2",
+    "@fontsource/ibm-plex-sans-jp": "^5.0.7",
+    "astro": "^3.3.2",
+    "cheerio": "1.0.0-rc.12"
+  },
+  "devDependencies": {
+    "@astrojs/tailwind": "^5.0.2",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/cheerio": "^0.22.33",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "daisyui": "^3.9.3",
+    "eslint": "^8.52.0",
     "eslint-config-prettier": "^9.0.0",
-    "framer-motion": "^10.16.1",
-    "next": "13.4.19",
-    "postcss": "8.4.28",
-    "prettier": "^3.0.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "tailwindcss": "3.3.3",
-    "typescript": "5.2.2"
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-plugin-astro": "^0.29.1",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-astro": "^0.10.0",
+    "remark-code-titles": "^0.1.2",
+    "tailwindcss": "^3.3.3",
+    "typescript": "*"
   }
 }

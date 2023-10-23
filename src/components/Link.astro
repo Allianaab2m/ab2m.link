@@ -1,0 +1,60 @@
+---
+const { href, title } = Astro.props;
+import { load } from "cheerio";
+
+let faviconLink: string;
+let pageTitle: string;
+let pageDescription: string;
+
+if (title === "card") {
+  const res = await fetch(href, { cache: "reload" });
+  const text_html = await res.text();
+
+  const $ = load(text_html);
+  const head = $("head");
+
+  pageTitle = head.find("title").text();
+  pageDescription = head.find("meta[name=description]").attr("content");
+  faviconLink = head.find('link[rel*="icon"]').attr("href");
+  if (faviconLink.startsWith("/")) {
+    if (faviconLink[1] === "/") {
+      faviconLink = "https:" + faviconLink;
+    } else {
+      const baseUrl = `https://${href.slice(8).split("/")[0]}`;
+      faviconLink = baseUrl + faviconLink;
+    }
+  }
+}
+---
+
+{
+  title === "card" ? (
+    <div class="mt-2 rounded-md bg-base-200 hover:bg-gray-800">
+      <a
+        target="_blank"
+        rel="nofollow noopener noreferrer"
+        href={href}
+        class="no-underline"
+      >
+        <div class="flex">
+          <div class="flex">
+            <img src={faviconLink} class="w-24 h-24 my-auto p-2" height="24" />
+            <div class="p-2">
+              <p class="text-2xl">{pageTitle}</p>
+              <p class="underline">{href}</p>
+              <p class="text-sm">{pageDescription}</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  ) : (
+    <a
+      target={href.startsWith("#") ? "" : "_blank"}
+      rel="nofollow noopener noreferrer"
+      href={href}
+    >
+      <slot />
+    </a>
+  )
+}
