@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .remark-code-title {
+    @apply bg-black;
+  }
+
+  #footnote-label {
+    @apply mt-4;
+  }
+
+  p code {
+    @apply bg-slate-900;
+  }
+}
