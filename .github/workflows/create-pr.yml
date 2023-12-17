@@ -16,13 +16,6 @@ jobs:
           fetch-depth: 0
 
       - name: Create Pull request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-          commit-message: "update blog article"
-          committer: Github <noreply@github.com>
-          author: Alliana <56180684+Allianaab2m@users.noreply.github.com>
-          branch: blog-update
-          delete-branch: true
-          title: "ブログ記事の更新"
-          body: "Updated blog article"
+        run: gh pr create -B "main" -H "blog-update" -t "Blog update" -b "Blog update"
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
