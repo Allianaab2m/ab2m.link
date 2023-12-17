@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require("tailwindcss/defaultTheme")
 const colors = {
   base: {
     black: "#100F0F",
@@ -54,6 +55,9 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     colors,
+    fontFamily: {
+      'sans': ["IBM Plex Sans JP", ...defaultTheme.fontFamily.sans]
+    }
   },
   darkMode: "class",
   plugins: [
