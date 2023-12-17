@@ -1,21 +1,46 @@
 ---
-import BaseLayout from "./Base.astro";
-import "./BlogDetail.css";
-const { frontmatter } = Astro.props;
+const { post } = Astro.props;
 ---
 
-<BaseLayout>
-  <div class="mx-auto px-4 lg:px-32 my-4 container">
-    <h1 class="text-3xl font-bold pt-1 items-start">{frontmatter.title}</h1>
-    <div class="divider my-1"></div>
-    <div class="flex flex-col justify-center items-center">
-      <article
-        class="max-w-none px-4 text-white prose prose-p:my-2 prose-pre:my-0 prose-pre:mb-4 prose-code:rounded prose-ul:my-2 prose-headings:mt-6"
+<style>
+  .entry :global(a) {
+    @apply underline underline-offset-2 text-cyan-light hover:text-cyan;
+  }
+
+  .entry :global(h1) {
+    @apply text-2xl md:text-3xl xl:text-4xl font-bold;
+  }
+  .entry :global(h2) {
+    @apply mt-4 mb-2 text-xl md:text-2xl font-bold underline underline-offset-4 before:content-['##_'] before:text-base-600;
+  }
+  .entry :global(h3) {
+    @apply font-bold before:content-['###_'] before:text-base-600;
+  }
+
+  .entry :global(li) {
+    @apply list-disc ml-8;
+  }
+
+  .entry :global(p) {
+    @apply my-1;
+  }
+</style>
+<div class="w-3/4 md:w-1/2 mx-auto my-4 text-base-black dark:text-base-paper">
+  <div class="entry">
+    <div class="flex gap-2">
+      <h1>{post.data.title}</h1>
+      <time
+        class="mt-auto"
+        datetime={new Date(post.data.published_at).toISOString()}
       >
-        <slot />
-      </article>
+        公開日: {
+          new Intl.DateTimeFormat("ja-JP").format(
+            Date.parse(post.data.published_at)
+          )
+        }
+      </time>
     </div>
-    <div class="divider my-1"></div>
-    <a href="/blogs" class="text-lg underline">←記事一覧に戻る</a>
+    <div class="border mb-4"></div>
+    <slot />
   </div>
-</BaseLayout>
+</div>

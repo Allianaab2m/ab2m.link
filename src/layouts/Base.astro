@@ -1,25 +1,46 @@
 ---
-import Navbar from "../components/Navbar.astro";
+import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "@fontsource/ibm-plex-sans-jp/400.css";
 import "@fontsource/ibm-plex-sans-jp/700.css";
-import "./base.css";
+const { title } = Astro.props;
 ---
 
 <html lang="ja">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-
-    <title>ab2m.link</title>
+    {title ? <title>{title} - ab2m.link</title> : <title>ab2m.link</title>}
   </head>
-  <body class="flex flex-col h-screen justfy-between">
-    <Navbar />
-    <div class="mb-auto mx-8 md:mx-12 lg:mx-48">
+  <body
+    class="flex
+    flex-col
+    h-screen justify-between
+    bg-base-paper
+    dark:bg-base-950
+    dark:text-paper
+    transition-colors
+    duration-300"
+  >
+    <script is:inline>
+      if (typeof window.localStorage.getItem("theme") === "string") {
+        const currentTheme = window.localStorage.getItem("theme");
+        if (currentTheme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      }
+      // localStorageになにもない時はmatchMediaで判定
+      if (
+        typeof window.localStorage.getItem("theme") !== "string" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <Header />
+    <main class="mb-auto mx-2 px-1 md:px-6">
       <slot />
-    </div>
+    </main>
     <Footer />
   </body>
 </html>

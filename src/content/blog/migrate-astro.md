@@ -1,18 +1,11 @@
 ---
-layout: ../../layouts/BlogDetail.astro
 title: Next.jsからAstroに移行した
-published_at: 2023-10-23T18:06:19.229Z
+published_at: "2023-10-23T18:06:19.229Z"
 ---
-import Link from "/src/components/Link.astro";
-export const components = {
-  a: Link,
-};
 
 元々このサイトはNext.js + TailwindCSS + daisyUI + Vercelという構成で作られていた．
 
 ある日，このサイトを触りたくなったときにふとNext.jsはToo muchだと感じたので，前から気になっていたAstroにエイヤと置き換えた．
-
-[](https://github.com/Allianaab2m/ab2m.link/pull/7 'card')
 
 見た目の部分では大きく変化した部分は無いが，ファイル構造はじめ，開発者体験は割と良くなったと感じている．
 

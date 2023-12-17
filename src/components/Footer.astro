@@ -1,26 +1,21 @@
----
-import MisskeyIcon from "./icons/Misskey.astro";
-import DiscordIcon from "./icons/Discord.astro";
-import GithubIcon from "./icons/Github.astro";
-import TwitterIcon from "./icons/Twitter.astro";
----
-
-<footer class="footer items-center p-4 bg-base-200 text-neutral-content">
-  <div class="item-center grid-flow-col">
-    <p>Copyright © 2023 Alliana - All right reserved.</p>
-  </div>
-  <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-    <a href="https://misskey.backspace.fm/@alliana">
-      <MisskeyIcon class="h-6 w-6" />
-    </a>
-    <a href="https://discord.com/users/271922478182301696">
-      <DiscordIcon class="h-6 w-6" />
-    </a>
-    <a href="https://github.com/Allianaab2m">
-      <GithubIcon class="h-6 w-6" />
-    </a>
-    <a href="https://twitter.com/ab2m_Alliana">
-      <TwitterIcon class="h-6 w-6" />
-    </a>
-  </div>
+<footer
+  class="flex flex-col sm:flex-row
+  mt-auto
+  px-6
+  h-12
+  flex-none
+  sm:items-center
+  justify-between
+  transition-colors
+  bg-base-paper
+  dark:bg-base-black
+  dark:text-base-paper
+  border-t-2
+  dark:border-base-800"
+>
+  <p class="text-sm">Copyright © 2023 Alliana - All right reserved.</p>
+  <p class="text-sm">
+    Using <a class="underline" href="https://stephango.com/flexoki">Flexoki</a>
+     colorscheme
+  </p>
 </footer>
