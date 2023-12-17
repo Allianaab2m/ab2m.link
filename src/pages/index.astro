@@ -1,71 +1,109 @@
 ---
-import BaseLayout from "../layouts/Base.astro";
-import ActivityPubIcon from "../components/icons/ActivityPub.astro";
-import GithubIcon from "../components/icons/Github.astro";
-import DiscordIcon from "../components/icons/Discord.astro";
-import TwitterIcon from "../components/icons/Twitter.astro";
+import MainLayout from "../layouts/MainLayout.astro";
+const Url = {
+  github: "https://github.com/Allianaab2m",
+  x: "https://x.com/ab2m_Alliana",
+  discord: "https://discord.com/users/271922478182301696",
+};
 ---
 
-<BaseLayout>
-  <div class="container mx-auto mt-4 px-4">
-    <h2 class="text-3xl font-bold">About</h2>
-    <div class="divider mt-0 mb-0"></div>
-    <p>色々とアウトプットするために作成したホームページです．</p>
-    <p>
-      外部のブログサービスにはあんまり書かないチラシの裏みたいな内容となっています．
-    </p>
-    <p>
-      このサイトの技術スタックはAstro + TailwindCSS + daisyUIとなっています．
-    </p>
-  </div>
-  <div class="container mx-auto mt-4 px-4">
-    <h2 class="text-3xl font-bold">Contact</h2>
-    <div class="divider mt-0 mb-0"></div>
-    <div class="space-y-4">
-      <div class="text-xl flex space-x-2">
-        <GithubIcon class="mt-1 h-6 w-6" />
-        <span>GitHub</span>
-        <a href="https://github.com/Allianaab2m" class="link"> Allianaab2m</a>
-      </div>
-
-      <div class="text-xl flex space-x-2">
-        <DiscordIcon class="mt-1 h-6 w-6" />
-        <span>Discord</span>
-        <a href="https://discord.com/users/271922478182301696" class="link">
-          allianaab2m
-        </a>
-      </div>
-
-      <div class="text-xl flex space-x-2">
-        <TwitterIcon class="mt-1 h-6 w-6" />
-        <span>Twitter</span>
-        <a href="https://twitter.com/ab2m_Alliana" class="link">
-          @ab2m_Alliana
-        </a>
-      </div>
-      <div>
-        <div class="text-xl flex space-x-2">
-          <ActivityPubIcon class="h-7 w-7 mt-0.5 -mr-1" />
-          <span>ActivityPub</span>
+<MainLayout>
+  <div class="md:flex gap-20">
+    <div class="flex justify-between">
+      <div class="flex-col my-auto">
+        <h1
+          class="mb-4
+        max-w-2xl
+        text-4xl
+        md:text-5xl
+        xl:text-6xl
+        font-extrabold
+        dark:text-base-paper"
+        >
+          Hello, I'm Alliana
+        </h1>
+        <div class="flex gap-12 mb-4">
+          <a
+            class="underline
+          text-base-500 md:text-xl
+          hover:text-base-700 dark:hover:text-base-300"
+            href={Url.github}
+          >
+            Github→
+          </a>
+          <a
+            class="underline
+          text-base-500 md:text-xl
+          hover:text-base-700 dark:hover:text-base-300"
+            href={Url.x}
+          >
+            X(Twitter)→
+          </a>
+          <a
+            class="underline
+          text-base-500 md:text-xl
+          hover:text-base-700 dark:hover:text-base-300"
+            href={Url.discord}
+          >
+            Discord→
+          </a>
         </div>
-        <div class="space-y-4">
-          <div>
-            <h2 class="text-xl">
-              <a href="https://misskey.backspace.fm/@alliana" class="link"
-                >@alliana@misskey.backspace.fm</a
-              >
-            </h2>
-          </div>
-          <div>
-            <h2 class="text-xl">
-              <a href="https://misskey.io/@Alliana_ab2m" class="link"
-                >@Alliana_ab2m@misskey.io</a
-              >
-            </h2>
-            <p>最近は動かしてないです．</p>
-          </div>
+        <div class="grid gap-2">
+          <img
+            src="https://skillicons.dev/icons?i=ts,lua,c,python,go,rust,nim"
+          />
+          <img
+            src="https://skillicons.dev/icons?i=nodejs,deno,tailwind,astro,nextjs,"
+          />
+          <img
+            src="https://skillicons.dev/icons?i=bots,discord,neovim,bash,linux"
+          />
         </div>
       </div>
     </div>
   </div>
-</BaseLayout>
+  <h1
+    class="my-4
+        max-w-2xl
+        text-3xl
+        md:text-4xl
+        xl:text-5xl
+        font-extrabold
+        dark:text-base-paper"
+  >
+    Blogs
+  </h1>
+  <h1
+    class="my-4
+        max-w-2xl
+        text-3xl
+        md:text-4xl
+        xl:text-5xl
+        font-extrabold
+        dark:text-base-paper"
+  >
+    Works
+  </h1>
+  <div class="grid grid-cols-2 lg:grid-cols-4 grid-rows-2 lg:grid-rows-1">
+    <a href="https://github.com/Allianaab2m/ab2m.link">
+      <img
+        src="https://github-readme-stats.vercel.app/api/pin/?username=Allianaab2m&repo=ab2m.link&show_owner=true&bg_color=1C1B1A&text_color=FFFCF0&title_color=FFFCF0&icon_color=FFFCF0"
+      />
+    </a>
+    <a href="https://github.com/Allianaab2m/dotfiles">
+      <img
+        src="https://github-readme-stats.vercel.app/api/pin/?username=Allianaab2m&repo=dotfiles&show_owner=true&bg_color=1C1B1A&text_color=FFFCF0&title_color=FFFCF0&icon_color=FFFCF0"
+      />
+    </a>
+    <a href="https://github.com/Allianaab2m/vimskey">
+      <img
+        src="https://github-readme-stats.vercel.app/api/pin/?username=Allianaab2m&repo=vimskey&show_owner=true&bg_color=1C1B1A&text_color=FFFCF0&title_color=FFFCF0&icon_color=FFFCF0"
+      />
+    </a>
+    <a href="https://github.com/Allianaab2m/telescope-kensaku.nvim">
+      <img
+        src="https://github-readme-stats.vercel.app/api/pin/?username=Allianaab2m&repo=telescope-kensaku.nvim&show_owner=true&bg_color=1C1B1A&text_color=FFFCF0&title_color=FFFCF0&icon_color=FFFCF0"
+      />
+    </a>
+  </div>
+</MainLayout>

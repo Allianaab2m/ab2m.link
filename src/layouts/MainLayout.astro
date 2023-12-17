@@ -1,0 +1,45 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+  </head>
+  <body
+    class="flex
+    flex-col
+    h-screen justify-between
+    bg-base-paper
+    dark:bg-base-950
+    dark:text-paper
+    transition-colors
+    duration-300"
+  >
+    <script is:inline>
+      if (typeof window.localStorage.getItem("theme") === "string") {
+        const currentTheme = window.localStorage.getItem("theme");
+        if (currentTheme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      }
+      // localStorageになにもない時はmatchMediaで判定
+      if (
+        typeof window.localStorage.getItem("theme") !== "string" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+      ) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+    <Header />
+    <main class="container mx-2 my-4 px-1 md:px-6 max-w-full">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
