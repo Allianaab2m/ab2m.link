@@ -20,7 +20,7 @@ jobs:
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           commit-message: "update blog article"
-          committer: Github <noreply@github.com?
+          committer: Github <noreply@github.com>
           author: ${{ github.author }} <${{ github.author }}@users.noreply.github.com>
           branch: blog-update
           branch-suffix: timestamp
