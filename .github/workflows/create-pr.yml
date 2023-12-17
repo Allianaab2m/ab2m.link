@@ -16,6 +16,6 @@ jobs:
           fetch-depth: 0
 
       - name: Create Pull request
-        run: gh pr create -B "main" -H "blog-update" -t "Blog update" -b "Blog update"
+        run: gh pr edit blog-update -b 'Blog update' -t 'Blog update'  && gh pr reopen blog-update || gh pr create --fill -B main -H blog-update
         env:
           GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
