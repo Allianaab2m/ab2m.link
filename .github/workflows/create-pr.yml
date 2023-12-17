@@ -1,0 +1,29 @@
+name: Create PR for update blog article
+
+on:
+  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - create-pr
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.env.pull_request.head.ref }}
+          fetch-depth:0
+
+      - name: Create Pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          commit-message: "update blog article"
+          committer: Github <noreply@github.com?
+          author: ${{ github.author }} <${{ github.author }}@users.noreply.github.com>
+          branch: blog-update
+          branch-suffix: timestamp
+          delete-branch: true
+          title: "ブログ記事の更新"
+          body: "Updated blog article"
