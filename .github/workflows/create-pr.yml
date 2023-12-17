@@ -21,7 +21,7 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           commit-message: "update blog article"
           committer: Github <noreply@github.com>
-          author: ${{ github.author }} <${{ github.author }}@users.noreply.github.com>
+          author: Alliana <56180684+Allianaab2m@users.noreply.github.com>
           branch: blog-update
           branch-suffix: timestamp
           delete-branch: true
