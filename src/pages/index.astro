@@ -1,4 +1,5 @@
 ---
+import ArticleList from "../components/ArticleList.astro";
 import MainLayout from "../layouts/MainLayout.astro";
 const Url = {
   github: "https://github.com/Allianaab2m",
@@ -8,7 +9,7 @@ const Url = {
 ---
 
 <MainLayout>
-  <div class="md:flex gap-20">
+  <div class="mt-2 md:flex gap-20">
     <div class="flex justify-between">
       <div class="flex-col my-auto">
         <h1
@@ -51,12 +52,15 @@ const Url = {
         <div class="grid gap-2">
           <img
             src="https://skillicons.dev/icons?i=ts,lua,c,python,go,rust,nim"
+            alt="My skill language logos"
           />
           <img
             src="https://skillicons.dev/icons?i=nodejs,deno,tailwind,astro,nextjs,"
+            alt="My skill framework, runtime logos"
           />
           <img
             src="https://skillicons.dev/icons?i=bots,discord,neovim,bash,linux"
+            alt="My other skills logos"
           />
         </div>
       </div>
@@ -73,6 +77,15 @@ const Url = {
   >
     Blogs
   </h1>
+  <ArticleList limit={5} />
+  <a
+    class="underline
+          text-base-500 md:text-lg
+          hover:text-base-700 dark:hover:text-base-300"
+    href="/blogs"
+  >
+    一覧→
+  </a>
   <h1
     class="my-4
         max-w-2xl
@@ -88,21 +101,25 @@ const Url = {
     <a href="https://github.com/Allianaab2m/ab2m.link">
       <img
         src="https://github-readme-stats.vercel.app/api/pin/?username=Allianaab2m&repo=ab2m.link&show_owner=true&bg_color=1C1B1A&text_color=FFFCF0&title_color=FFFCF0&icon_color=FFFCF0"
+        alt="ab2m.link repository link card"
       />
     </a>
     <a href="https://github.com/Allianaab2m/dotfiles">
       <img
         src="https://github-readme-stats.vercel.app/api/pin/?username=Allianaab2m&repo=dotfiles&show_owner=true&bg_color=1C1B1A&text_color=FFFCF0&title_color=FFFCF0&icon_color=FFFCF0"
+        alt="dotfiles repository link card"
       />
     </a>
     <a href="https://github.com/Allianaab2m/vimskey">
       <img
         src="https://github-readme-stats.vercel.app/api/pin/?username=Allianaab2m&repo=vimskey&show_owner=true&bg_color=1C1B1A&text_color=FFFCF0&title_color=FFFCF0&icon_color=FFFCF0"
+        alt="vimskey repository link card"
       />
     </a>
     <a href="https://github.com/Allianaab2m/telescope-kensaku.nvim">
       <img
         src="https://github-readme-stats.vercel.app/api/pin/?username=Allianaab2m&repo=telescope-kensaku.nvim&show_owner=true&bg_color=1C1B1A&text_color=FFFCF0&title_color=FFFCF0&icon_color=FFFCF0"
+        alt="telescope kensaku neovim repository link card"
       />
     </a>
   </div>

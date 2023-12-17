@@ -1,0 +1,94 @@
+---
+import ZennIcon from "../components/ZennIcon.astro"
+interface Props {
+  limit?: number;
+}
+import { getCollection } from "astro:content";
+const { limit } = Astro.props;
+
+export type ZennPost = {
+  id: number;
+  post_type: "Article";
+  title: string;
+  slug: string;
+  published: boolean;
+  comments_count: number;
+  liked_count: number;
+  body_letters_count: number;
+  article_type: "tech" | "idea";
+  emoji: string;
+  is_suspending_private: boolean;
+  published_at: string;
+  body_updated_at: string;
+  source_repo_updated_at: string;
+  path: string;
+  user: {
+    id: number;
+    username: string;
+    name: string;
+    avatar_small_url: string;
+  };
+  publication: null;
+};
+
+export type Post = {
+  url: string;
+  title: string;
+  published_at: string;
+  zenn: boolean;
+};
+
+const res = await fetch(
+  "https://zenn.dev/api/articles?username=alliana_ab2m&order=latest"
+);
+
+if (!res.ok) {
+  throw new Error("Failed to fetch data");
+}
+
+const zennPosts: { articles: ZennPost[] } = await res.json();
+const mdPosts = await getCollection("blog");
+let posts: Post[] = [];
+zennPosts.articles.map(p => {
+  posts.push({
+    url: `https://zenn.dev${p.path}`,
+    title: p.title,
+    published_at: p.published_at,
+    zenn: true,
+  });
+});
+mdPosts.map(p => {
+  posts.push({
+    url: `/blogs/${p.slug}`,
+    title: p.data.title,
+    published_at: p.data.published_at,
+    zenn: false,
+  });
+});
+
+posts.sort((a, b) => Date.parse(b.published_at) - Date.parse(a.published_at));
+
+if (limit != undefined) {
+  posts = posts.slice(0, limit);
+}
+---
+
+<div class="md:w-3/4 text-base-500 md:text-lg divide-base-500">
+  {
+    posts.map(p => (
+      <li class="border-b last:border-none border-spacing-4 space-y-2 list-none">
+        <div class="lg:relative">
+            <time class="lg:absolute inset-y-0 right-0" datetime={(new Date(p.published_at)).toISOString()}>
+                {new Intl.DateTimeFormat('ja-JP').format(Date.parse(p.published_at))}
+            </time>
+        </div>
+        <div class="flex">
+            <a class="my-auto hover:text-base-700 dark:hover:text-base-300" href={p.url}>
+                {p.title}
+            </a>
+            {p.zenn ? <div class="my-auto ml-2"><ZennIcon /></div> : <></>}
+        </div>
+      </li>
+    ))
+  }
+</div>

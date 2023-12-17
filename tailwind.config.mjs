@@ -56,5 +56,7 @@ export default {
     colors,
   },
   darkMode: "class",
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/typography")
+  ],
 };
