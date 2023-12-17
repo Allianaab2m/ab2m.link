@@ -8,6 +8,9 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.0.3
     version: 5.0.3(astro@4.0.4)(tailwindcss@3.3.6)
+  '@fontsource/ibm-plex-sans-jp':
+    specifier: ^5.0.11
+    version: 5.0.11
   astro:
     specifier: ^4.0.4
     version: 4.0.4
@@ -536,6 +539,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource/ibm-plex-sans-jp@5.0.11:
+    resolution: {integrity: sha512-29esZO2S1zERX2uSpfxfeh9TqDqcCZOQ0nLxyK6oC+lnJ5vZG1uDYKK/SBrvaZq9vC9e7iSi9KPWPKSf3tbH6g==}
+    dev: false
 
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
