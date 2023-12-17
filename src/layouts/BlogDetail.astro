@@ -25,7 +25,7 @@ const { post } = Astro.props;
     @apply my-1;
   }
 </style>
-<div class="w-2/3 md:w-1/2 mx-auto my-4 text-base-black dark:text-base-paper">
+<div class="w-3/4 md:w-1/2 mx-auto my-4 text-base-black dark:text-base-paper">
   <div class="entry">
     <h1>{post.data.title}</h1>
     <time datetime={new Date(post.data.published_at).toISOString()}>
