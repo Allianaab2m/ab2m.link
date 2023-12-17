@@ -59,7 +59,7 @@ zennPosts.articles.map(p => {
 });
 mdPosts.map(p => {
   posts.push({
-    url: `/blogs/${p.slug}`,
+    url: `/blog/${p.slug}`,
     title: p.data.title,
     published_at: p.data.published_at,
     zenn: false,
@@ -73,7 +73,7 @@ if (limit != undefined) {
 }
 ---
 
-<div class="md:w-3/4 text-base-500 md:text-lg divide-base-500">
+<div class="md:w-3/4 text-base-700 dark:text-base-500 md:text-lg divide-base-500">
   {
     posts.map(p => (
       <li class="border-b last:border-none border-spacing-4 space-y-2 list-none">
@@ -83,7 +83,7 @@ if (limit != undefined) {
             </time>
         </div>
         <div class="flex">
-            <a class="my-auto hover:text-base-700 dark:hover:text-base-300" href={p.url}>
+            <a class="my-auto hover:text-base-800 dark:hover:text-base-300" href={p.url}>
                 {p.title}
             </a>
             {p.zenn ? <div class="my-auto ml-2"><ZennIcon /></div> : <></>}
