@@ -50,5 +50,7 @@ exec /usr/bin/efibootmgr -e 3 "$@"
 ## 参考文献
 
 [Unified Extensible Firmware Interface - ArchWiki](https://wiki.archlinux.jp/index.php/Unified_Extensible_Firmware_Interface)
+
 [Arch Linuxのインストール](https://zenn.dev/imzrust/articles/42420891968a7)
+
 [Linuxの起動の流れ #Linux - Qiita](https://qiita.com/tomomoss/items/f3f3d9d4ffd8fe3662bb)
