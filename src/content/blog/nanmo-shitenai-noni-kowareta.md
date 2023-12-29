@@ -1,6 +1,6 @@
 ---
 title: ポータブルSSDにArch Linuxを入れるときはブートローダの場所に気を付けよう
-published_at: 2023-12-30T04:01:23.514Z
+published_at: "2023-12-30T04:01:23.514Z"
 ---
 ## TL:DR;
 
