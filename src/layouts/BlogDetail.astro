@@ -47,6 +47,14 @@ const { post } = Astro.props;
   .entry :global(pre code) {
     @apply bg-base-black px-0;
   }
+
+  .entry :global(blockquote) {
+    @apply p-2 border-l-2 italic;
+  }
+
+  .entry :global(blockquote p) {
+    @apply ml-2;
+  }
 </style>
 
 <div
