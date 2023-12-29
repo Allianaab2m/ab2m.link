@@ -20,7 +20,7 @@ published_at: "2023-12-30T04:01:23.514Z"
 
 適当にググりながらヒットしたのがこのページ．やはりArch Wikiは聖書
 
-https://wiki.archlinux.jp/index.php/Unified_Extensible_Firmware_Interface#.E3.83.AA.E3.83.A0.E3.83.BC.E3.83.90.E3.83.96.E3.83.AB.E3.83.89.E3.83.A9.E3.82.A4.E3.83.96.E3.81.AE.E3.83.87.E3.83.95.E3.82.A9.E3.83.AB.E3.83.88.E3.83.96.E3.83.BC.E3.83.88.E3.83.91.E3.82.B9
+[Unified Extensible Firmware Interface#ファームウェアのメニューにUEFIブートローダーが表示されない - ArchWiki]https://wiki.archlinux.jp/index.php/Unified_Extensible_Firmware_Interface#.E3.83.AA.E3.83.A0.E3.83.BC.E3.83.90.E3.83.96.E3.83.AB.E3.83.89.E3.83.A9.E3.82.A4.E3.83.96.E3.81.AE.E3.83.87.E3.83.95.E3.82.A9.E3.83.AB.E3.83.88.E3.83.96.E3.83.BC.E3.83.88.E3.83.91.E3.82.B9
 
 > 一部のファームウェアはカスタムのブートエントリをサポートしていません。そのようなファームウェアはハードコードされたブートエントリからしか起動しません。
 
