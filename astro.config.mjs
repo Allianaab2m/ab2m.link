@@ -12,7 +12,10 @@ export default defineConfig({
   integrations: [tailwind(), expressiveCode({
     defaultProps: {
       wrap: true,
-      frame: "code"
+      frame: "code",
+    },
+    styleOverrides: {
+      codeFontSize: '1rem'
     },
     themes: [flexppuccin]
   })],
