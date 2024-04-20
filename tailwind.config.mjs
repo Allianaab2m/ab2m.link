@@ -57,9 +57,31 @@ export default {
     colors,
     fontFamily: {
       'sans': ["IBM Plex Sans JP", ...defaultTheme.fontFamily.sans]
+    },
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            code: {
+              backgroundColor: theme('colors.base.900'),
+              borderRadius: theme('borderRadius.DEFAULT'),
+              paddingTop: theme('spacing.[0.5]'),
+              paddingBottom: theme('spacing.[0.5]'),
+              paddingLeft: theme('spacing.[1.5]'),
+              paddingRight: theme('spacing.[1.5]'),
+              fontWeight: 'normal',
+            },
+            'code::before': {
+              content: 'none',
+            },
+            'code::after': {
+              content: 'none',
+            },
+          },
+        },
+      })
     }
   },
-  darkMode: "class",
   plugins: [
     require("@tailwindcss/typography")
   ],

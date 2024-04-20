@@ -1,6 +1,7 @@
 ---
 title: ポータブルSSDにArch Linuxを入れるときはブートローダの場所に気を付けよう
 published_at: "2023-12-30T04:01:23.514Z"
+emoji: "💥"
 ---
 ## TL:DR;
 
@@ -37,7 +38,7 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=Arch --re
 
 そこで，`efibootmgr`をラップする．`/usr/local/bin/efibootmgr`に
 
-```sh
+```sh title=/usr/local/bin/efibootmgr
 #!/bin/sh
 
 exec /usr/bin/efibootmgr -e 3 "$@"

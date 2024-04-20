@@ -73,20 +73,22 @@ if (limit != undefined) {
 }
 ---
 
-<div class="md:w-3/4 text-base-700 dark:text-base-500 md:text-lg divide-base-500">
+<div class="text-base-300 md:text-lg divide-base-500">
   {
     posts.map(p => (
-      <li class="border-b last:border-none border-spacing-4 space-y-2 list-none">
-        <div class="lg:relative">
-            <time class="lg:absolute inset-y-0 right-0" datetime={(new Date(p.published_at)).toISOString()}>
-                {new Intl.DateTimeFormat('ja-JP').format(Date.parse(p.published_at))}
-            </time>
-        </div>
-        <div class="flex">
-            <a class="my-auto hover:text-base-800 dark:hover:text-base-300" href={p.url}>
-                {p.title}
-            </a>
-            {p.zenn ? <div class="my-auto ml-2"><ZennIcon /></div> : <></>}
+      <li class="list-none">
+        <div class="flex-col my-6">
+          <div class="flex">
+              <a class="my-auto hover:text-base-300" href={p.url}>
+                  {p.title}
+              </a>
+              {p.zenn ? <div class="my-auto ml-2"><ZennIcon /></div> : <></>}
+          </div>
+          <div class="lg:relative">
+              <time class="" datetime={(new Date(p.published_at)).toISOString()}>
+                  {new Intl.DateTimeFormat('ja-JP').format(Date.parse(p.published_at))}
+              </time>
+          </div>
         </div>
       </li>
     ))
