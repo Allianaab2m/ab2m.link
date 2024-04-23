@@ -1,6 +1,7 @@
 ---
 title: Next.jsからAstroに移行した
 published_at: "2023-10-23T18:06:19.229Z"
+emoji: "▶️"
 ---
 
 元々このサイトはNext.js + TailwindCSS + daisyUI + Vercelという構成で作られていた．

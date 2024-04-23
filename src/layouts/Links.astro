@@ -1,0 +1,43 @@
+---
+import Link from "../components/Link.astro";
+
+let links = [
+  { name: "GitHub", id: "Allianaab2m", href: "https://github.com/Allianaab2m" },
+  {
+    name: "Bluesky",
+    id: "@ab2m.link",
+    href: "https://bsky.app/profile/ab2m.link",
+  },
+  {
+    name: "Discord",
+    id: "allianaab2m",
+    href: "https://discord.com/users/271922478182301696",
+  },
+  { name: "Zenn", id: "alliana_ab2m", href: "https://zenn.dev/alliana_ab2m" },
+  {
+    name: "ListenBrainz",
+    id: "Alliana",
+    href: "https://listenbrainz.org/user/Alliana/",
+  },
+  {
+    name: "GPG Key",
+    id: "BE93 7556 2F46 135A 855D F10C 690B 82B2 B500 ABE1",
+    href: "https://keys.openpgp.org/vks/v1/by-fingerprint/BE9375562F46135A855DF10C690B82B2B500ABE1",
+  },
+  {
+    name: "SSH Key",
+    id: "on GitHub",
+    href: "https://github.com/Allianaab2m.keys",
+  },
+];
+
+const { limit } = Astro.props;
+
+if (limit != undefined) {
+  links = links.slice(0, limit);
+}
+---
+
+<div class="text-base-paper">
+  {links.map(l => <Link name={l.name} id={l.id} href={l.href} />)}
+</div>

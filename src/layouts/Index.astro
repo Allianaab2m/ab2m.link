@@ -1,89 +1,59 @@
 ---
 import ArticleList from "../components/ArticleList.astro";
-const Url = {
-  github: "https://github.com/Allianaab2m",
-  x: "https://x.com/ab2m_Alliana",
-  discord: "https://discord.com/users/271922478182301696",
-};
+import LinkLayouts from "../layouts/Links.astro";
 ---
 
 <div class="mt-4 md:flex gap-20">
   <div class="flex justify-between">
     <div class="flex-col my-auto">
       <h1
-        class="mb-4
-        max-w-2xl
-        text-4xl
-        md:text-5xl
-        xl:text-6xl
-        font-extrabold
-        dark:text-base-paper"
+        class="mb-4 text-3xl md:text-4xl xl:text-5xl text-base-paper font-extrabold"
       >
-        Hello, I'm Alliana
+        Alliana
       </h1>
-      <div class="flex gap-12 mb-4">
-        <a
-          class="underline
-          text-cyan-light
-          dark:text-cyan md:text-xl
-          hover:text-cyan dark:hover:text-cyan-light"
-          href={Url.github}
+      <div class="flex gap-12 mb-4"></div>
+      <div class="flex gap-4">
+        <h1
+          class="my-4
+        max-w-2xl
+        text-2xl
+        md:text-3xl
+        xl:text-4xl
+        font-extrabold
+      text-base-paper"
         >
-          Github→
-        </a>
-        <a
-          class="underline
-          text-cyan-light
-          dark:text-cyan md:text-xl
-          hover:text-cyan dark:hover:text-cyan-light"
-          href={Url.x}
-        >
-          X(Twitter)→
-        </a>
-        <a
-          class="underline
-          text-cyan-light
-          dark:text-cyan md:text-xl
-          hover:text-cyan dark:hover:text-cyan-light"
-          href={Url.discord}
-        >
-          Discord→
-        </a>
-      </div>
-      <div class="grid gap-2">
-        <img
-          src="https://skillicons.dev/icons?i=ts,lua,c,python,go,rust,nim"
-          alt="My skill language logos"
-        />
-        <img
-          src="https://skillicons.dev/icons?i=nodejs,deno,tailwind,astro,nextjs,"
-          alt="My skill framework, runtime logos"
-        />
-        <img
-          src="https://skillicons.dev/icons?i=bots,discord,neovim,bash,linux"
-          alt="My other skills logos"
-        />
+          Links
+        </h1>
+        <div class="flex flex-col text-base-paper">
+          <LinkLayouts limit={3} />
+          <a
+            class="underline text-cyan md:text-lg hover:text-cyan-light"
+            href="/links"
+          >
+            Others
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 <h1
   class="my-4
         max-w-2xl
-        text-3xl
-        md:text-4xl
-        xl:text-5xl
+        text-2xl
+        md:text-3xl
+        xl:text-4xl
         font-extrabold
-        dark:text-base-paper"
+      text-base-paper"
 >
   Blogs
 </h1>
 <ArticleList limit={5} />
 <a
   class="underline
-          text-cyan-light
-          dark:text-cyan md:text-xl
-          hover:text-cyan dark:hover:text-cyan-light"
+          text-cyan md:text-xl
+          hover:text-cyan-light"
   href="/blog"
 >
   一覧→
@@ -91,11 +61,11 @@ const Url = {
 <h1
   class="my-4
         max-w-2xl
-        text-3xl
-        md:text-4xl
-        xl:text-5xl
+        text-2xl
+        md:text-3xl
+        xl:text-4xl
         font-extrabold
-        dark:text-base-paper"
+        text-base-paper"
 >
   Works
 </h1>

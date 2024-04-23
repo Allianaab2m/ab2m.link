@@ -1,7 +1,8 @@
 ---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
 import { getCollection } from "astro:content";
 import BlogDetailLayout from "../../layouts/BlogDetail.astro";
-import BaseLayout from "../../layouts/Base.astro";
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map(post => ({
@@ -14,8 +15,22 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BaseLayout>
-  <BlogDetailLayout post={post}>
-    <Content />
-  </BlogDetailLayout>
-</BaseLayout>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>{post.data.title} - ab2m.link</title>
+  </head>
+  <body class="flex
+    flex-col
+  bg-base-950">
+    <div class="sticky top-0">
+      <Header />
+    </div>
+    <main>
+      <BlogDetailLayout post={post}>
+        <Content />
+      </BlogDetailLayout>
+    </main>
+    <Footer />
+  </body>
+</html>
