@@ -20,13 +20,8 @@ export default defineConfig({
     themes: [flexppuccin]
   })],
   markdown: {
-    // syntaxHighlight: "shiki",
     remarkRehype: {
       footnoteLabel: "脚注"
     },
-    // shikiConfig: {
-    //   theme: "css-variables",
-    //   wrap: true
-    // }
   }
 });
