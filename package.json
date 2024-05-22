@@ -1,0 +1,22 @@
+{
+  "name": "ab2m.link",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "prepare": "panda codegen"
+  },
+  "author": "Alliana",
+  "dependencies": {
+    "astro": "^4.8.6",
+    "astro-icon": "^1.1.0"
+  },
+  "devDependencies": {
+    "@iconify-json/devicon": "^1.1.41",
+    "@iconify-json/devicon-plain": "^1.1.40",
+    "@iconify-json/ic": "^1.1.17",
+    "@iconify-json/mdi": "^1.1.66",
+    "@pandacss/dev": "^0.39.1"
+  }
+}

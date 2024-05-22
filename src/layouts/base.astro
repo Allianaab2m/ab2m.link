@@ -1,0 +1,16 @@
+---
+import '../index.css'
+import { container } from '../../styled-system/patterns'
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class={container({ maxW: 'breakpoint-md' })}>
+      <slot />
+    </div>
+  </body>
+</html>

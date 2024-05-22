@@ -1,0 +1,11 @@
+---
+import { css } from '../../styled-system/css'
+const { title, description, href } = Astro.props
+---
+
+<a href={href}>
+  <div class={css({ borderWidth: '1px', borderRadius: '4px', p: '2' })}>
+    <p class={css({ fontSize: '2xl' })}>{title}</p>
+    <p class={css({ textAlign: 'end' })}>{description}</p>
+  </div>
+</a>

@@ -1,0 +1,19 @@
+---
+import { css } from '../../../styled-system/css'
+import { Icon } from 'astro-icon/components'
+import { hstack } from '../../../styled-system/patterns'
+---
+
+<div>
+  <a href="https://github.com/Allianaab2m" class={hstack({ _hover: { textDecoration: 'underline' } })}>
+    <Icon name="mdi:github" size={24} />
+    <p class={css({ fontSize: 'xl', display: 'flex' })}>Allianaab2m</p>
+  </a>
+  <a href="https://discord.com/users/" class={hstack({ _hover: { textDecoration: 'underline' } })}>
+    <Icon name="ic:baseline-discord" size={24} />
+    <p class={css({ fontSize: 'xl', display: 'flex' })}>Allianaab2m</p>
+  </a>
+  <a href="mailto://me@ab2m.link" class={hstack({ _hover: { textDecoration: 'underline' } })}>
+    <Icon name="mdi:email" size={24} />me[at]ab2m.link<br />(Recieve only)
+  </a>
+</div>
