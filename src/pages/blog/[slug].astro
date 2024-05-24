@@ -1,30 +1,25 @@
 ---
-import type { GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
-import Base from "../../layouts/base.astro";
+import type { GetStaticPaths } from 'astro'
+import { getCollection } from 'astro:content'
+import BlogDetail from '../../layouts/blogdetail.astro'
+import { css } from '../../../styled-system/css'
+import { center } from '../../../styled-system/patterns'
 
 export const getStaticPaths = (async () => {
-  const blockEntries = await getCollection("blog");
+  const blockEntries = await getCollection('blog')
   return blockEntries.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
-  }));
-}) satisfies GetStaticPaths;
+  }))
+}) satisfies GetStaticPaths
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { entry } = Astro.props
+const { Content } = await entry.render()
 ---
 
-<Base>
-  <article>
-    <Content />
-  </article>
-</Base>
-
-<style>
-  article :global(h2) {
-    font-size: 24px;
-    border-left-width: 2px;
-    padding-left: 8px;
-  }
-</style>
+<BlogDetail>
+  <p class={css({ fontSize: '6xl', textAlign: 'center' })}>{entry.data.emoji}</p>
+  <h1 class={center({ fontSize: '3xl', textAlign: 'center' })}>{entry.data.title}</h1>
+  <Content />
+  <a href="/blog">←記事一覧に戻る</a>
+</BlogDetail>

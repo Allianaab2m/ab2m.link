@@ -21,7 +21,7 @@ emoji: "💥"
 
 適当にググりながらヒットしたのがこのページ．やはりArch Wikiは聖書
 
-[Unified Extensible Firmware Interface#ファームウェアのメニューにUEFIブートローダーが表示されない - ArchWiki](https://wiki.archlinux.jp/index.php/Unified_Extensible_Firmware_Interface#.E3.83.AA.E3.83.A0.E3.83.BC.E3.83.90.E3.83.96.E3.83.AB.E3.83.89.E3.83.A9.E3.82.A4.E3.83.96.E3.81.AE.E3.83.87.E3.83.95.E3.82.A9.E3.83.AB.E3.83.88.E3.83.96.E3.83.BC.E3.83.88.E3.83.91.E3.82.B9)
+https://wiki.archlinux.jp/index.php/Unified_Extensible_Firmware_Interface#.E3.83.AA.E3.83.A0.E3.83.BC.E3.83.90.E3.83.96.E3.83.AB.E3.83.89.E3.83.A9.E3.82.A4.E3.83.96.E3.81.AE.E3.83.87.E3.83.95.E3.82.A9.E3.83.AB.E3.83.88.E3.83.96.E3.83.BC.E3.83.88.E3.83.91.E3.82.B9
 
 > 一部のファームウェアはカスタムのブートエントリをサポートしていません。そのようなファームウェアはハードコードされたブートエントリからしか起動しません。
 
@@ -50,8 +50,10 @@ exec /usr/bin/efibootmgr -e 3 "$@"
 
 ## 参考文献
 
-[Unified Extensible Firmware Interface - ArchWiki](https://wiki.archlinux.jp/index.php/Unified_Extensible_Firmware_Interface)
+https://wiki.archlinux.jp/index.php/Unified_Extensible_Firmware_Interface
 
-[Arch Linuxのインストール](https://zenn.dev/imzrust/articles/42420891968a7)
+https://zenn.dev/imzrust/articles/42420891968a7
 
-[Linuxの起動の流れ #Linux - Qiita](https://qiita.com/tomomoss/items/f3f3d9d4ffd8fe3662bb)
+https://qiita.com/tomomoss/items/f3f3d9d4ffd8fe3662bb
+
+https://zenn.dev/alliana_ab2m

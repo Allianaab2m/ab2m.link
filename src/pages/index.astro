@@ -1,38 +1,38 @@
 ---
-import Base from "../layouts/base.astro";
-import { css } from "../../styled-system/css";
-import { circle, flex, vstack } from "../../styled-system/patterns";
-import Skills from "../components/index/skills.astro";
-import Contacts from "../components/index/contacts.astro";
-import Works from "../components/index/works.astro";
-import Blogs from "../components/index/blogs.astro";
+import Base from '../layouts/base.astro'
+import { css } from '../../styled-system/css'
+import { circle, flex, vstack } from '../../styled-system/patterns'
+import Skills from '../components/index/skills.astro'
+import Contacts from '../components/index/contacts.astro'
+import Works from '../components/index/works.astro'
+import Bloglist from '../components/bloglist.astro'
 ---
 
 <Base>
   <div
     class={flex({
-      mb: "2",
-      gap: "4",
-      flexDirection: "column",
-      sm: { flexDirection: "row" },
+      mb: '2',
+      gap: '4',
+      flexDirection: 'column',
+      sm: { flexDirection: 'row' },
     })}
   >
-    <div class={vstack({ pt: "4", bg: "#1d1f21", px: "8" })}>
+    <div class={vstack({ pt: '4', bg: '#1d1f21', px: '8' })}>
       <img
         alt="Alliana's icon"
         src="https://avatars.githubusercontent.com/u/56180684?v=4"
-        class={circle({ size: "16", mx: "auto" })}
+        class={circle({ size: '16', mx: 'auto' })}
       />
-      <h1 class={css({ fontSize: "4xl", fontWeight: "bold" })}>Alliana</h1>
+      <h1 class={css({ fontSize: '4xl', fontWeight: 'bold' })}>Alliana</h1>
       <Contacts />
     </div>
     <div>
-      <p class={flex({ my: "2" })}>ここに文章を挿入</p>
-      <div class={flex({ gap: "2" })}>
+      <p class={flex({ my: '2' })}>ここに文章を挿入</p>
+      <div class={flex({ gap: '2' })}>
         <Skills />
       </div>
     </div>
   </div>
   <Works />
-  <Blogs />
+  <Bloglist />
 </Base>
