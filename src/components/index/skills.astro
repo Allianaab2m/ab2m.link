@@ -1,34 +1,49 @@
 ---
-import { css } from '../../../styled-system/css'
-import { flex } from '../../../styled-system/patterns'
-import { Icon } from 'astro-icon/components'
+import { css } from "../../../styled-system/css";
+import { flex } from "../../../styled-system/patterns";
+import { Icon } from "astro-icon/components";
 ---
 
 <div>
-  <h2 class={css({ fontSize: '2xl', fontWeight: 'semibold', borderLeftWidth: '2px', pl: '2' })}>Skills</h2>
-  <div class={css({ justifyContent: 'space-between' })}>
-    <div class={flex({ gap: '2' })}>
-      <Icon name="devicon-plain:typescript" size={24} /><Icon name="devicon-plain:javascript" size={24} />
+  <h2
+    class={css({
+      fontSize: "2xl",
+      fontWeight: "semibold",
+      borderLeftWidth: "2px",
+      pl: "2",
+    })}
+  >
+    Skills
+  </h2>
+  <div class={css({ mt: "2", justifyContent: "space-between" })}>
+    <div class={flex({ gap: "2" })}>
+      <Icon name="devicon-plain:typescript" size={24} /><Icon
+        name="devicon-plain:javascript"
+        size={24}
+      />
       TypeScript/JavaScript
     </div>
-    <div class={flex({ gap: '2', whiteSpace: 'nowrap' })}>
-      <Icon name="devicon-plain:c" size={24} /><Icon name="devicon-plain:cplusplus" size={24} />
+    <div class={flex({ gap: "2", whiteSpace: "nowrap" })}>
+      <Icon name="devicon-plain:c" size={24} /><Icon
+        name="devicon-plain:cplusplus"
+        size={24}
+      />
       C/C++
     </div>
-    <div class={flex({ gap: '2' })}>
+    <div class={flex({ gap: "2" })}>
       <Icon name="devicon:react" size={24} />
       React
     </div>
-    <div class={flex({ gap: '2' })}>
+    <div class={flex({ gap: "2" })}>
       <Icon name="devicon-plain:lua" size={24} />
       Lua
     </div>
-    <div class={flex({ gap: '2' })}>
+    <div class={flex({ gap: "2" })}>
       <Icon name="devicon-plain:python" size={24} />
       Python
     </div>
-    <div class={flex({ gap: '2' })}>
-      <Icon name="devicon:rust" size={24} />
+    <div class={flex({ gap: "2" })}>
+      <Icon name="devicon-plain:rust" size={24} />
       Rust
     </div>
   </div>

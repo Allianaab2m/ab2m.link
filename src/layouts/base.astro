@@ -1,6 +1,8 @@
 ---
-import '../index.css'
-import { container } from '../../styled-system/patterns'
+import "../index.css";
+import { container } from "../../styled-system/patterns";
+import { css } from "../../styled-system/css";
+import Footer from "../components/footer.astro";
 ---
 
 <html lang="ja">
@@ -8,9 +10,10 @@ import { container } from '../../styled-system/patterns'
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
-  <body>
-    <div class={container({ maxW: 'breakpoint-md' })}>
+  <body class={css({ background: "#131516", color: "stone.50" })}>
+    <div class={container({ maxW: "breakpoint-md" })}>
       <slot />
+      <Footer />
     </div>
   </body>
 </html>

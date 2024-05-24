@@ -10,7 +10,7 @@ importers:
     dependencies:
       astro:
         specifier: ^4.8.6
-        version: 4.8.6(lightningcss@1.23.0)(typescript@5.3.3)
+        version: 4.8.6(@types/node@17.0.45)(lightningcss@1.23.0)(typescript@5.3.3)
       astro-icon:
         specifier: ^1.1.0
         version: 1.1.0
@@ -3324,7 +3324,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro@4.8.6(lightningcss@1.23.0)(typescript@5.3.3):
+  astro@4.8.6(@types/node@17.0.45)(lightningcss@1.23.0)(typescript@5.3.3):
     dependencies:
       '@astrojs/compiler': 2.8.0
       '@astrojs/internal-helpers': 0.4.0
@@ -3383,8 +3383,8 @@ snapshots:
       tsconfck: 3.0.3(typescript@5.3.3)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-      vite: 5.2.11(lightningcss@1.23.0)
-      vitefu: 0.2.5(vite@5.2.11(lightningcss@1.23.0))
+      vite: 5.2.11(@types/node@17.0.45)(lightningcss@1.23.0)
+      vitefu: 0.2.5(vite@5.2.11(@types/node@17.0.45)(lightningcss@1.23.0))
       which-pm: 2.2.0
       yargs-parser: 21.1.1
       zod: 3.23.8
@@ -5168,18 +5168,19 @@ snapshots:
       unist-util-stringify-position: 4.0.0
       vfile-message: 4.0.2
 
-  vite@5.2.11(lightningcss@1.23.0):
+  vite@5.2.11(@types/node@17.0.45)(lightningcss@1.23.0):
     dependencies:
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.17.2
     optionalDependencies:
+      '@types/node': 17.0.45
       fsevents: 2.3.3
       lightningcss: 1.23.0
 
-  vitefu@0.2.5(vite@5.2.11(lightningcss@1.23.0)):
+  vitefu@0.2.5(vite@5.2.11(@types/node@17.0.45)(lightningcss@1.23.0)):
     optionalDependencies:
-      vite: 5.2.11(lightningcss@1.23.0)
+      vite: 5.2.11(@types/node@17.0.45)(lightningcss@1.23.0)
 
   web-namespaces@2.0.1: {}
 

@@ -1,0 +1,30 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Base from "../../layouts/base.astro";
+
+export const getStaticPaths = (async () => {
+  const blockEntries = await getCollection("blog");
+  return blockEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Base>
+  <article>
+    <Content />
+  </article>
+</Base>
+
+<style>
+  article :global(h2) {
+    font-size: 24px;
+    border-left-width: 2px;
+    padding-left: 8px;
+  }
+</style>

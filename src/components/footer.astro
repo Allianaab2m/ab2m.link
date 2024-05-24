@@ -1,0 +1,31 @@
+---
+import { Icon } from "astro-icon/components";
+import { flex, grid } from "../../styled-system/patterns";
+import BlueskyIcon from "./icons/bluesky.astro";
+import ZennIcon from "./icons/zenn.astro";
+
+const year = new Date().getFullYear();
+---
+
+<div
+  class={grid({
+    gridAutoFlow: "column",
+    minH: "20",
+    justifyItems: "start",
+    alignContent: "center",
+    placeContent: "space-between",
+  })}
+>
+  <p>© {year} Alliana</p>
+  <div class={flex()}>
+    <a href="https://github.com/Allianaab2m">
+      <Icon name="mdi:github" size={36} />
+    </a>
+    <a href="https://bsky.app/profile/ab2m.link">
+      <BlueskyIcon />
+    </a>
+    <a href="https://zenn.dev/alliana_ab2m">
+      <ZennIcon />
+    </a>
+  </div>
+</div>
