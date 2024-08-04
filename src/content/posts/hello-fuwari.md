@@ -62,5 +62,5 @@ GitHubのAdmonitionにも対応している．
 
 $$
   \int_S \textbf{\textit{D}} \cdot \textbf{\textit{n}}dS=Q \\
-  \nabla \times \textbf{\textit{E}}  -\frac{\partial{\textbf{\textit{B}}}}{\partial t}
+  \nabla \times \textbf{\textit{E}} = -\frac{\partial{\textbf{\textit{B}}}}{\partial t}
 $$
