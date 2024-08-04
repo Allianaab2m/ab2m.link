@@ -63,9 +63,9 @@ export const profileConfig: ProfileConfig = {
       url: 'https://discord.com/users/271922478182301696',
     },
     {
-      name: 'Bluesky',
-      icon: 'fa6-brands:bluesky',
-      url: 'https://bsky.app/profile/ab2m.link',
+      name: 'Mastodon',
+      icon: 'fa6-brands:mastodon',
+      url: 'https://mstdn.maud.io/@ab2m',
     },
     {
       name: 'Zenn',

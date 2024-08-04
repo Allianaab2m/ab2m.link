@@ -1,8 +1,6 @@
 # About
 
-名前: Alliana(ありあな)
-
-年齢: 2X
+名前: Alliana(Yuji Yoshimura)
 
 DiscordのBotやMinecraftのModを作ったことをきっかけにプログラミングに興味を持ちました．
 
@@ -42,3 +40,28 @@ DiscordのBotやMinecraftのModを作ったことをきっかけにプログラ�
 - Tailwind CSS
 - Astro
 - Prisma
+
+## Works
+
+2024/03/28~
+::github{repo="pulsate-dev/pulsate"}
+
+## Keys
+
+### SSH
+
+Public key
+
+`ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFLmR7uSY/Aj8w5VeojtLp8w0ba4tQnUIOzoe8GMkvsM`
+
+Fingerprint
+
+`Hs+Cktwz7OamzvP++egTOQfAD5vndGKcT7QBAC3jbgM`
+
+### OpenPGP
+
+[`BE93 7556 2F46 135A 855D F10C 690B 82B2 B500 ABE1`](https://ab2m.link/pub.asc)
+
+### nostr
+
+[`npub1yyujjzhakwydqzqryt9j8mx90n6yele3awj3ult0ntna7hxkhh0s7p8xv5`](https://ab2m.link/.well-known/nostr.json)
