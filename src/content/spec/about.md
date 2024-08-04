@@ -60,7 +60,7 @@ Fingerprint
 
 ### OpenPGP
 
-[`BE93 7556 2F46 135A 855D F10C 690B 82B2 B500 ABE1`](https://ab2m.link/pub.asc)
+<a href="https://ab2m.link/pub.asc" download><code>BE93 7556 2F46 135A 855D F10C 690B 82B2 B500 ABE1</code></a>
 
 ### nostr
 
