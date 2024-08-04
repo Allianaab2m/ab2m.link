@@ -2,7 +2,7 @@
 
 名前: Alliana(Yuji Yoshimura)
 
-DiscordのBotやMinecraftのModを作ったことをきっかけにプログラミングに興味を持ちました．
+高校生のときに，DiscordのBotやMinecraftのModを作ったことをきっかけにプログラミングに興味を持ちました．
 
 静的型付け言語とNeovimでプログラミングするのが好きです．
 
