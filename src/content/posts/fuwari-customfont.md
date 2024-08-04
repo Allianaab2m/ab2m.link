@@ -5,7 +5,7 @@ description: ''
 image: ''
 tags: [Astro, Fuwari]
 category: 'Website'
-draft: true
+draft: false
 ---
 
 Fuwariのデフォルトフォント(Roboto)を自分の好きなフォントに変更する方法．
