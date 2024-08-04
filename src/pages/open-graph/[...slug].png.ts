@@ -8,8 +8,8 @@ import { siteConfig } from '@/config'
 /* TTF, OTF and WOFF, this import may not compatible with all static pages services (?) */
 // import Roboto300 from 'node_modules/@fontsource/roboto/files/roboto-latin-300-normal.woff'
 // import Roboto700 from 'node_modules/@fontsource/roboto/files/roboto-latin-700-normal.woff'
-import IBMPlexSansJP300 from 'node_modules/@fontsource/ibm-plex-sans-jp/files/ibm-plex-sans-jp-latin-300-normal.woff'
-import IBMPlexSansJP700 from 'node_modules/@fontsource/ibm-plex-sans-jp/files/ibm-plex-sans-jp-latin-700-normal.woff'
+import IBMPlexSansJP300 from 'node_modules/@fontsource/ibm-plex-sans-jp/files/ibm-plex-sans-jp-0-300-normal.woff'
+import IBMPlexSansJP700 from 'node_modules/@fontsource/ibm-plex-sans-jp/files/ibm-plex-sans-jp-0-700-normal.woff'
 
 const ogOptions: SatoriOptions = {
   width: 1200,
@@ -40,16 +40,13 @@ const markup = (
 ) =>
   /* Satori uses tailwind! Create or view a desing using https://og-playground.vercel.app/ */
   html`
-    <div tw="flex flex-col w-full h-full justify-center bg-amber-800">
-      <div tw="bg-gray-50 flex w-full">
-        <div tw="flex flex-col md:flex-row w-full py-12 px-8 items-center">
-          <h2 tw="flex flex-col font-bold tracking-tight text-gray-900 text-left">
-            <span tw="text-3xl">${title}</span>
-            <span tw="text-amber-600 font-light text-xl">${description}</span>
-          </h2>
-        </div>
-      </div>
+  <div tw="flex flex-col w-full h-full items-center justify-center bg-[#1c1c24] p-8">
+    <div tw="flex flex-col w-full h-full bg-white rounded-xl drop-shadow-xl">
+      <span tw="text-5xl font-bold pt-12 pl-8 pb-4">${title}</span>
+      <span tw="text-2xl pl-8 pb-36">${description}</span>
+      <span tw="text-3xl pl-140">ab2m.link</span>
     </div>
+  </div>
   `
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>
