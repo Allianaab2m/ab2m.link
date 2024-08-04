@@ -40,10 +40,13 @@ const markup = (
 ) =>
   /* Satori uses tailwind! Create or view a desing using https://og-playground.vercel.app/ */
   html`
-  <div tw="flex flex-col w-full h-full items-center justify-center bg-[#1c1c24] p-8">
-    <div tw="flex flex-col w-full h-full bg-white rounded-xl drop-shadow-xl">
-      <span tw="text-5xl font-bold pt-12 pl-8 pb-4">${title}</span>
-      <span tw="text-2xl pl-8 pb-36">${description}</span>
+  <div tw="flex flex-col w-full h-full items-center justify-center bg-[#0c0d13] p-8">
+    <div tw="flex items-center px-20 w-full h-full bg-[#1c1c24] rounded-xl drop-shadow-xl">
+      <div tw="flex flex-col text-white">
+        <span tw="text-7xl font-bold">${title}</span>
+        <span tw="text-4xl">${description}</span>
+        <span tw="text-2xl">| ab2m.link</span>
+      </div>
     </div>
   </div>
   `
