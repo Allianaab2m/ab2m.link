@@ -34,7 +34,7 @@ export const siteConfig: SiteConfig = {
   ],
   siteOGImage: {
     enable: true,
-    src: '/demo-opengraph.png',
+    src: '/cover.png',
   },
   postOGImageDynamic: true,
 }
