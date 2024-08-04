@@ -1,0 +1,13 @@
+---
+import { Icon } from "astro-icon/components";
+const { slug } = Astro.props
+---
+
+  <a href=`https://github.com/Allianaab2m/ab2m.link/tree/main/src/content/posts/${slug}.md` class:list={["font-bold overflow-hidden active:scale-95"]}>
+      {<div class="btn-card max-w-fit rounded-2xl h-[3.75rem] px-4 flex items-center justify-start gap-4">
+          <Icon name="fa6-brands:github" class="text-[1.75rem] text-black/75 dark:text-white/75" />
+          <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap text-black/75 dark:text-white/75">
+              GitHubで編集を提案
+          </div>
+      </div>}
+  </a>
