@@ -32,6 +32,11 @@ export const siteConfig: SiteConfig = {
     //   sizes: '32x32',              // (Optional) Size of the favicon, set only if you have favicons of different sizes
     // }
   ],
+  siteOGImage: {
+    enable: true,
+    src: '/demo-opengraph.png',
+  },
+  postOGImageDynamic: true,
 }
 
 export const navBarConfig: NavBarConfig = {

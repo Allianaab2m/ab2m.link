@@ -17,6 +17,7 @@ import { AdmonitionComponent } from './src/plugins/rehype-component-admonition.m
 import { GithubCardComponent } from './src/plugins/rehype-component-github-card.mjs'
 import { parseDirectiveNode } from './src/plugins/remark-directive-rehype.js'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
+import { rawFonts } from './src/plugins/vite-raw-fonts.mjs'
 import stylus from 'stylus'
 
 const oklchToHex = str => {
@@ -129,6 +130,7 @@ export default defineConfig({
         },
       },
     },
+    plugins: [rawFonts(['.woff2', '.ttf', '.woff', '.otf'])],
     css: {
       preprocessorOptions: {
         stylus: {
