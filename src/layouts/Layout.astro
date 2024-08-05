@@ -21,7 +21,7 @@ interface Props {
   title?: string
   banner?: string
   description?: string
-	slug: string | undefined
+  slug: string | undefined
 }
 
 let { title, banner, description, slug } = Astro.props
@@ -31,12 +31,18 @@ let { title, banner, description, slug } = Astro.props
 // so use Swup hooks instead to change the height immediately when a link is clicked
 const isHomePage = pathsEqual(Astro.url.pathname, url('/'))
 
-let ogImageSrc;
+let ogImageSrc
 
-ogImageSrc = siteConfig.siteOGImage.enable ? (Astro.site ? `${Astro.site.origin}${siteConfig.siteOGImage.src}` : siteConfig.siteOGImage.src) : false
+ogImageSrc = siteConfig.siteOGImage.enable
+  ? Astro.site
+    ? `${Astro.site.origin}${siteConfig.siteOGImage.src}`
+    : siteConfig.siteOGImage.src
+  : false
 
 if (siteConfig.postOGImageDynamic && slug) {
-	ogImageSrc = Astro.site ? `${Astro.site.origin}/open-graph/${slug}.png` : false
+  ogImageSrc = Astro.site
+    ? `${Astro.site.origin}/open-graph/${slug}.png`
+    : false
 }
 
 // defines global css variables
