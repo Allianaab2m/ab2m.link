@@ -8,6 +8,7 @@ import icon from 'astro-icon'
 import Color from 'colorjs.io'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeComponents from 'rehype-components'
+import remarkEmoji from 'remark-emoji'
 import rehypeKatex from 'rehype-katex'
 import rehypeSlug from 'rehype-slug'
 import remarkDirective from 'remark-directive'
@@ -18,7 +19,6 @@ import { GithubCardComponent } from './src/plugins/rehype-component-github-card.
 import { parseDirectiveNode } from './src/plugins/remark-directive-rehype.js'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 import { rawFonts } from './src/plugins/vite-raw-fonts.mjs'
-import stylus from 'stylus'
 
 const oklchToHex = str => {
   const DEFAULT_HUE = 250
@@ -71,6 +71,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkMath,
+      remarkEmoji,
       remarkReadingTime,
       remarkGithubAdmonitionsToDirectives,
       remarkDirective,
