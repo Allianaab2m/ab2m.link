@@ -6,7 +6,7 @@ tags: ["Gleam"]
 category: Development
 draft: false
 ---
-Gleamは`if`/`else`文・式や`return`といった構文を持たないので，caseとパターンマッチングのみで条件分岐を表現し，関数の最後の値を返り値とする．なかなかに思想が強い．
+Gleamは`if`/`else`文・式や`return`といった構文を持たないので，caseとパターンマッチングのみで条件分岐を表現し，関数の最後の式で評価された値を返り値とする．なかなかに思想が強い．
 
 例として，何かしらのIDをバリデーションしたい場面があったとする．
 
@@ -67,7 +67,7 @@ pub fn main() {
 > **In a procedural language:**
 > 
 > 
-> ```jsx
+> ```js
 > if (predicate) return value;
 > // ...
 > ```
