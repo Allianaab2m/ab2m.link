@@ -4,6 +4,7 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import swup from "@swup/astro";
 import Compress from "astro-compress";
+import partytown from "@astrojs/partytown";
 import icon from "astro-icon";
 import Color from "colorjs.io";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -65,6 +66,11 @@ export default defineConfig({
       Image: false,
       Action: {
         Passed: async () => true,
+      },
+    }),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
       },
     }),
   ],
