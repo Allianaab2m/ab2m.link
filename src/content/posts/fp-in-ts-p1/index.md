@@ -52,7 +52,7 @@ const map = <T, U>(opt: Option<T>, fn: (v: T) => U): Option<U> => {}
 ```ts
 const map = <T, U>(opt: Option<T>, fn: (v: T) => U): Option<U> => {
   if (OptionFn.isNone(opt)) {
-    return OptionFn.none
+    return OptionFn.none()
   }
 
   return OptionFn.some(fn(opt.value))
