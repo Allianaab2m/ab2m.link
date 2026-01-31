@@ -162,5 +162,7 @@ math should get its own line and be put in in double-dollarsigns:
 
 $$I = \int \rho R^{2} dV$$
 
+$$e^0 \frac{1}{27} + e^t \frac{10}{27} + e^{2t} \frac{8}{27} + e^{3t} \frac{8}{27}$$
+
 And note that you can backslash-escape any punctuation characters
 which you wish to be displayed literally, ex.: \`foo\`, \*bar\*, etc.
