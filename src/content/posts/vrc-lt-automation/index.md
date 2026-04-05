@@ -51,6 +51,116 @@ ffmpeg -framerate 1/2 -i slide-%02d.png -s 3840x2160 -r 60 -c:v libx264 -pix_fmt
 
 この仕組み自体は GitHub Actions と Cloudflare R2 を用いた簡易的なものであるため，使ってみたい場合はご自身のアカウントで同じような環境を構築し，ワークフローを書くことで実現できる．
 
+以下，Claude に以上の要件を伝えた上で書いてもらったワークフローを貼っておく．
+
+`*.md` に変更があった場合と，手動で実行できるようになっている．
+
+`*.md` の方は差分更新で，手動で実行した場合は全てのスライドをコンパイルするので，枚数が増えてくると `ffmpeg` の実行にそこそこ時間がかかりそうな雰囲気がある．
+
+Secrets は適宜自分の S3 互換ストレージのものに置き換えるなどしてほしい．
+
+```yaml
+name: Build and Deploy Slides
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/*.md"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Determine target directories
+        id: targets
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            dirs=$(ls -d */index.md 2>/dev/null | xargs -I{} dirname {})
+          else
+            # HEAD コミットで変更された .md ファイルの親ディレクトリだけ対象
+            dirs=$(git diff-tree --no-commit-id --name-only -r HEAD -- '*.md' \
+              | xargs -I{} dirname {} | sort -u \
+              | while read -r dir; do [ -f "$dir/index.md" ] && echo "$dir"; done)
+          fi
+
+          if [ -z "$dirs" ]; then
+            echo "No slide directories to build."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+          {
+            echo "dirs<<EOF"
+            echo "$dirs"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        if: steps.targets.outputs.skip == 'false'
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        if: steps.targets.outputs.skip == 'false'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils ffmpeg
+          npm install -g @marp-team/marp-cli
+
+      - name: Build and convert slides
+        if: steps.targets.outputs.skip == 'false'
+        run: |
+          while IFS= read -r dir; do
+            [ -z "$dir" ] && continue
+            project=$(basename "$dir")
+            echo "::group::Building $project"
+
+            # Marp to PDF
+            marp --theme-set .styles/index.css --allow-local-files --pdf "$dir/index.md" -o "$dir/${project}.pdf" --verbose
+
+            # PDF to PNG (3840x2160)
+            pushd "$dir"
+            pdftoppm -png -scale-to-x 3840 -scale-to-y 2160 "${project}.pdf" slide
+
+            # Rename to ensure 2-digit zero-padded numbering for ffmpeg
+            for f in slide-*.png; do
+              num=$(echo "$f" | sed 's/slide-0*\([0-9]*\)\.png/\1/')
+              dest=$(printf 'slide-%02d.png' "$num")
+              [ "$f" != "$dest" ] && mv "$f" "$dest"
+            done
+
+            # PNG to MP4
+            ffmpeg -framerate 1/2 -i slide-%02d.png -s 3840x2160 -r 60 -c:v libx264 -pix_fmt yuv420p -profile:v baseline "${project}.mp4"
+
+            rm -f slide-*.png
+            popd
+
+            echo "::endgroup::"
+          done <<< "${{ steps.targets.outputs.dirs }}"
+
+      - name: Upload to Cloudflare R2
+        if: steps.targets.outputs.skip == 'false'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          R2_ENDPOINT: https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_BUCKET: ${{ secrets.R2_BUCKET_NAME }}
+        run: |
+          while IFS= read -r dir; do
+            [ -z "$dir" ] && continue
+            project=$(basename "$dir")
+            aws s3 cp "$dir/${project}.pdf" "s3://${R2_BUCKET}/slides/${project}.pdf" --endpoint-url "$R2_ENDPOINT"
+            aws s3 cp "$dir/${project}.mp4" "s3://${R2_BUCKET}/slides/${project}.mp4" --endpoint-url "$R2_ENDPOINT"
+          done <<< "${{ steps.targets.outputs.dirs }}"
+```
+
 ## 見た目の違いに関して
 
 実際どれぐらい見た目が違うのか実際に検証した．ちなみに私は画像処理系に関しては門外漢なので，主観ベースでしかお話できないことを予め断っておく．
