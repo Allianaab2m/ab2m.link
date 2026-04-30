@@ -21,6 +21,7 @@ import { GithubCardComponent } from './src/plugins/rehype-component-github-card.
 import { parseDirectiveNode } from './src/plugins/remark-directive-rehype.js'
 import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 import { rawFonts } from './src/plugins/vite-raw-fonts.mjs'
+import remarkImageCaption from './src/plugins/remark-image-caption.ts'
 
 const oklchToHex = str => {
   const DEFAULT_HUE = 250
@@ -87,6 +88,12 @@ export default defineConfig({
       remarkDirective,
       parseDirectiveNode,
       remarkBudoux,
+      [
+        remarkImageCaption,
+        {
+          className: 'image-caption',
+        },
+      ],
     ],
     rehypePlugins: [
       rehypeKatex,

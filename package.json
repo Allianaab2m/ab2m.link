@@ -5,6 +5,7 @@
     "@astrojs/sitemap": "^3.6.0",
     "@astrojs/svelte": "^5.7.3",
     "@astrojs/tailwind": "^5.1.5",
+    "@fastify/deepmerge": "^3.2.1",
     "@fontsource/ibm-plex-mono": "^5.2.7",
     "@fontsource/ibm-plex-sans-jp": "^5.2.8",
     "@resvg/resvg-js": "^2.6.2",
@@ -14,6 +15,7 @@
     "astro-icon": "^1.1.5",
     "colorjs.io": "^0.5.2",
     "hastscript": "^9.0.1",
+    "linkedom": "^0.18.12",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
     "overlayscrollbars": "^2.13.0",
@@ -35,6 +37,7 @@
     "svelte": "^4.2.20",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3",
+    "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
