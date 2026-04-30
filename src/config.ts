@@ -42,8 +42,8 @@ export const siteConfig: SiteConfig = {
 export const navBarConfig: NavBarConfig = {
   links: [
     LinkPreset.Home,
+    LinkPreset.Blog,
     LinkPreset.Archive,
-    LinkPreset.About,
     {
       name: 'GitHub',
       url: 'https://github.com/Allianaab2m/ab2m.link', // Internal links should not include the base path, as it is automatically added

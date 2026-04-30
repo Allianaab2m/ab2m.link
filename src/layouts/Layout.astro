@@ -310,6 +310,41 @@ init();
 /* astro:after-swap event happened before swap animation */
 document.addEventListener('astro:after-swap', init);
 
+/* Intercept link clicks that cross the landing-page (/) boundary BEFORE swup
+   sees them, so swup never starts a transition / fade-out for those links.
+   This prevents the "previous layout lingers briefly" flash. */
+function isLandingPath(path: string): boolean {
+	return pathsEqual(path, url('/'))
+}
+document.addEventListener('click', (e: MouseEvent) => {
+	if (e.defaultPrevented) return
+	if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return
+	const target = e.target as HTMLElement | null
+	const link = target?.closest?.('a[href]') as HTMLAnchorElement | null
+	if (!link) return
+	if (link.target && link.target !== '_self') return
+	if (link.hasAttribute('download')) return
+	const href = link.getAttribute('href')
+	if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#')) return
+	let to: URL
+	try {
+		to = new URL(href, window.location.origin)
+	} catch {
+		return
+	}
+	if (to.origin !== window.location.origin) return
+	const fromLP = isLandingPath(window.location.pathname)
+	const toLP = isLandingPath(to.pathname)
+	if (fromLP === toLP) return
+	e.preventDefault()
+	e.stopPropagation()
+	e.stopImmediatePropagation()
+	// Hide content immediately so the user doesn't see the old layout while the
+	// browser fetches the next page.
+	document.documentElement.style.opacity = '0'
+	window.location.assign(to.href)
+}, true)
+
 const setup = () => {
 	// TODO: temp solution to change the height of the banner
 /*
@@ -328,6 +363,28 @@ const setup = () => {
 		document.documentElement.style.setProperty('--content-delay', '0ms')
 	})
 	window.swup.hooks.on('content:replace', initCustomScrollbar)
+	// Force full page reload when crossing the landing-page boundary via
+	// browser back/forward (popstate). Click navigations are handled at
+	// document capture-phase above and never reach swup.
+	window.swup.hooks.before('visit:start', (visit) => {
+		const lpPath = url('/')
+		const fromUrl = (visit as any).from?.url
+			? new URL((visit as any).from.url, window.location.origin)
+			: new URL(window.location.href)
+		const toUrl = new URL(visit.to.url, window.location.origin)
+		const fromLP = pathsEqual(fromUrl.pathname, lpPath)
+		const toLP = pathsEqual(toUrl.pathname, lpPath)
+		if (fromLP !== toLP) {
+			if (visit.animation) visit.animation.animate = false
+			visit.abort()
+			document.documentElement.style.opacity = '0'
+			if (window.location.pathname === toUrl.pathname) {
+				window.location.reload()
+			} else {
+				window.location.assign(toUrl.href)
+			}
+		}
+	})
 	window.swup.hooks.on('visit:start', (visit) => {
 		// change banner height immediately when a link is clicked
 		const bodyElement = document.querySelector('body')
