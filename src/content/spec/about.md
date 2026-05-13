@@ -1,6 +1,4 @@
-# About
-
-名前: Alliana(Yuji Yoshimura)
+本名: Yuji Yoshimura
 
 高校生のときに，DiscordのBotやMinecraftのModを作ったことをきっかけにプログラミングに興味を持ちました．
 
@@ -12,31 +10,24 @@
 
 ### Programming Language
 
-#### TypeScript/JavaScript
-  - 一番書いていて，最も好きな言語です
+- TypeScript / JavaScript
+- Python
+- Gleam
+- Kotlin
+- Java
+- Go
+- C
 
-#### Python
-  - 最初に触れたプログラミング言語です
-  - 今でも競技プログラミングの時に限り書いています
+::github{repo="Allianaab2m/kata-gleam"}
 
-#### Kotlin
-  - Minecraftの[Mod](https://github.com/Allianaab2m/RomeChat)を書きました
+::github{repo="Allianaab2m/RomeChat"}
 
-#### Java
-  - あまり高度な内容でなければ書けます
-  - ただGradleやMavenといったビルド・依存関係周りの理解が曖昧です
-  
-#### Rust
-  - 勉強中です．難しい...
-  - 具体的に作りたいものが思い浮かばないので一生勉強中
-
-#### C
-  - 大学の講義で履修しました 教養程度の知識があります
-  
 ### Frameworks
+
 - React
 - Next.js(App router)
 - Remix
+- Tanstack Start
 - Tailwind CSS
 - Astro
 - Prisma
