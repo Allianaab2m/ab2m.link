@@ -1,16 +1,58 @@
 ---
-import "@fontsource-variable/jetbrains-mono";
-import "@fontsource-variable/jetbrains-mono/wght-italic.css";
+import path from "node:path";
+import { getImage } from "astro:assets";
+import { parseHTML } from "linkedom";
+import "@fontsource/ibm-plex-mono/300.css";
+import "@fontsource/ibm-plex-mono/300-italic.css";
+import "../../styles/image-caption.css";
 
 interface Props {
 	class: string;
+	/** directory of the markdown entry, relative to /src (used to resolve relative image paths) */
+	basePath?: string;
 }
-const className = Astro.props.class;
+const { class: className, basePath = "/" } = Astro.props;
+
+let html = await Astro.slots.render("default");
+
+// Images emitted as raw HTML by remark-image-caption bypass Astro's image
+// pipeline, so their relative paths have to be resolved and optimized here.
+const RELATIVE_IMG = /<img[^>]+src="(?![a-zA-Z]+:|\/)/;
+if (RELATIVE_IMG.test(html)) {
+	const { document } = parseHTML(html);
+	// biome-ignore lint/suspicious/noExplicitAny: glob import of image modules
+	const modules: Record<string, () => Promise<any>> = import.meta.glob(
+		"../../**/*.{jpeg,jpg,png,tiff,webp,gif,svg,avif}",
+	);
+	const re = /^(?![a-zA-Z]+:\/|\/)/;
+	for (const img of document.querySelectorAll("img")) {
+		const src = img.getAttribute("src");
+		if (!src || !re.test(src)) continue;
+
+		const normalizedPath = path
+			.normalize(path.join("../../", basePath, src))
+			.replaceAll("\\", "/");
+		const moduleLoader = modules[normalizedPath];
+		if (!moduleLoader) continue;
+
+		try {
+			const module = await moduleLoader();
+			const result = await getImage({ src: module.default });
+			img.setAttribute("src", result.src);
+		} catch (error) {
+			console.warn(
+				`Skipping image "${normalizedPath}" due to processing error:`,
+				error,
+			);
+		}
+	}
+	html = document.toString();
+}
 ---
 <div data-pagefind-body class={`prose dark:prose-invert prose-base !max-w-none custom-md ${className}`}>
     <!--<div class="prose dark:prose-invert max-w-none custom-md">-->
     <!--<div class="max-w-none custom-md">-->
-    <slot/>
+    <Fragment set:html={html} />
 </div>
 
 <script>

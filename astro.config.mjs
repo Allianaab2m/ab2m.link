@@ -1,9 +1,11 @@
+import partytown from "@astrojs/partytown";
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
+import Compress from "astro-compress";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import { defineConfig } from "astro/config";
@@ -12,6 +14,7 @@ import rehypeComponents from "rehype-components"; /* Render the custom directive
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive"; /* Handle directives */
+import remarkEmoji from "remark-emoji";
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
@@ -21,12 +24,15 @@ import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.m
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
+import remarkImageCaption from "./src/plugins/remark-image-caption.ts";
+import { remarkBudouxExceptHeadings } from "./src/plugins/remark-budoux-except-headings.mjs";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
+import { rawFonts } from "./src/plugins/vite-raw-fonts.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://fuwari.vercel.app/",
+	site: "https://ab2m.link",
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
@@ -49,10 +55,11 @@ export default defineConfig({
 		}),
 		icon({
 			include: {
-				"preprocess: vitePreprocess(),": ["*"],
+				"material-symbols": ["*"],
 				"fa6-brands": ["*"],
 				"fa6-regular": ["*"],
 				"fa6-solid": ["*"],
+				"simple-icons": ["*"],
 			},
 		}),
 		expressiveCode({
@@ -76,7 +83,7 @@ export default defineConfig({
 				borderRadius: "0.75rem",
 				borderColor: "none",
 				codeFontSize: "0.875rem",
-				codeFontFamily: "'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+				codeFontFamily: "'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
 				codeLineHeight: "1.5rem",
 				frames: {
 					editorBackground: "var(--codeblock-bg)",
@@ -99,18 +106,34 @@ export default defineConfig({
 				showCopyToClipboardButton: false,
 			}
 		}),
-        svelte(),
+		svelte(),
 		sitemap(),
+		Compress({
+			CSS: false,
+			Image: false,
+			Action: {
+				Passed: async () => true, // https://github.com/PlayForm/Compress/issues/376
+			},
+		}),
+		partytown({
+			config: {
+				forward: ["dataLayer.push"],
+			},
+		}),
 	],
 	markdown: {
 		remarkPlugins: [
 			remarkMath,
+			remarkEmoji,
 			remarkReadingTime,
 			remarkExcerpt,
 			remarkGithubAdmonitionsToDirectives,
 			remarkDirective,
+			// must run before remarkSectionize: it only transforms top-level paragraphs
+			[remarkImageCaption, { className: "image-caption" }],
 			remarkSectionize,
 			parseDirectiveNode,
+			remarkBudouxExceptHeadings,
 		],
 		rehypePlugins: [
 			rehypeKatex,
@@ -167,6 +190,13 @@ export default defineConfig({
 					warn(warning);
 				},
 			},
+		},
+		plugins: [rawFonts([".woff2", ".ttf", ".woff", ".otf"])],
+		ssr: {
+			external: ["@resvg/resvg-js"],
+		},
+		optimizeDeps: {
+			exclude: ["@resvg/resvg-js"],
 		},
 	},
 });

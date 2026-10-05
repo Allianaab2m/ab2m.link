@@ -1,4 +1,5 @@
 /* From: https://github.com/chrismwilliams/astro-theme-cactus/blob/main/astro.config.ts */
+import fs from 'node:fs'
 
 /**
  * Returns a Vite plugin configuration object for handling raw fonts.
