@@ -5,21 +5,24 @@ import I18nKey from "../i18n/i18nKey";
 import { i18n } from "../i18n/translation";
 import { getPostUrlBySlug } from "../utils/url-utils";
 
-export let tags: string[];
-export let categories: string[];
+// Filters can be given as props (path-based pages such as /archive/tag/<tag>/)
+// or as query parameters (/archive/?tag=<tag>).
+export let tags: string[] = [];
+export let categories: string[] = [];
+export let uncategorized = false;
 export let sortedPosts: Post[] = [];
 
 const params = new URLSearchParams(window.location.search);
-tags = params.has("tag") ? params.getAll("tag") : [];
-categories = params.has("category") ? params.getAll("category") : [];
-const uncategorized = params.get("uncategorized");
+if (params.has("tag")) tags = params.getAll("tag");
+if (params.has("category")) categories = params.getAll("category");
+if (params.get("uncategorized")) uncategorized = true;
 
 interface Post {
 	slug: string;
 	data: {
 		title: string;
 		tags: string[];
-		category?: string;
+		category?: string | null;
 		published: Date;
 	};
 }

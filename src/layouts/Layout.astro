@@ -1,7 +1,7 @@
 ---
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
+import "@fontsource/ibm-plex-sans-jp/400.css";
+import "@fontsource/ibm-plex-sans-jp/500.css";
+import "@fontsource/ibm-plex-sans-jp/700.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
 import { profileConfig, siteConfig } from "@/config";
@@ -26,9 +26,23 @@ interface Props {
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
+	slug?: string;
 }
 
-let { title, banner, description, lang, setOGTypeArticle } = Astro.props;
+let { title, banner, description, lang, setOGTypeArticle, slug } =
+	Astro.props;
+
+// Open Graph image: per-post dynamic image (src/pages/open-graph/[...slug].png.ts) or the site-wide cover
+let ogImageSrc: string | false = siteConfig.siteOGImage.enable
+	? Astro.site
+		? `${Astro.site.origin}${siteConfig.siteOGImage.src}`
+		: siteConfig.siteOGImage.src
+	: false;
+if (siteConfig.postOGImageDynamic && slug) {
+	ogImageSrc = Astro.site
+		? `${Astro.site.origin}/open-graph/${slug}.png`
+		: false;
+}
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -99,6 +113,11 @@ const bannerOffset =
 		<meta name="twitter:title" content={pageTitle}>
 		<meta name="twitter:description" content={description || pageTitle}>
 
+		<meta name="Hatena::Bookmark" content="nocomment" />
+
+		{ogImageSrc && <meta property="og:image" content={ogImageSrc} />}
+		{ogImageSrc && <meta property="twitter:image" content={ogImageSrc} />}
+
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		{favicons.map(favicon => (
@@ -144,6 +163,16 @@ const bannerOffset =
 
 
 		<slot name="head"></slot>
+
+		<!-- Google tag (gtag.js) -->
+		<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-1SV5ELFYC4"></script>
+		<script type="text/partytown">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'G-1SV5ELFYC4');
+		</script>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
@@ -374,7 +403,31 @@ function init() {
 /* Load settings when entering the site */
 init();
 
+/*
+ * The landing page (/) and the blog pages use different layouts, but swup only
+ * replaces the containers. Make swup ignore navigations that cross that boundary
+ * so the browser performs a normal page load (they are also skipped by preload).
+ * Back/forward never crosses the boundary within one document, because swup
+ * never creates such a history entry.
+ */
+function crossesLandingBoundary(target: string): boolean {
+	const toPath = new URL(target, window.location.href).pathname
+	const landing = url('/')
+	return pathsEqual(window.location.pathname, landing) !== pathsEqual(toPath, landing)
+}
+
+type IgnoreVisit = (url: string, context: { el?: Element; event?: Event }) => boolean
+
+function ignoreLandingBoundary() {
+	// the type of window.swup in global.d.ts is not the swup instance
+	const options = (window.swup as unknown as { options: { ignoreVisit: IgnoreVisit } }).options
+	const defaultIgnoreVisit = options.ignoreVisit
+	options.ignoreVisit = (target, context) =>
+		crossesLandingBoundary(target) || defaultIgnoreVisit(target, context)
+}
+
 const setup = () => {
+	ignoreLandingBoundary()
 	// TODO: temp solution to change the height of the banner
 /*
 	window.swup.hooks.on('animation:out:start', () => {

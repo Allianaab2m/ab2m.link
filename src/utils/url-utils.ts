@@ -16,9 +16,11 @@ export function getPostUrlBySlug(slug: string): string {
 	return url(`/posts/${slug}/`);
 }
 
+// This site keeps the path-based archive URLs (/archive/tag/<tag>/, /archive/category/<category>/)
+// instead of upstream's query-based ones (/archive/?tag=<tag>).
 export function getTagUrl(tag: string): string {
 	if (!tag) return url("/archive/");
-	return url(`/archive/?tag=${encodeURIComponent(tag.trim())}`);
+	return url(`/archive/tag/${encodeURIComponent(tag.trim())}/`);
 }
 
 export function getCategoryUrl(category: string | null): string {
@@ -27,8 +29,8 @@ export function getCategoryUrl(category: string | null): string {
 		category.trim() === "" ||
 		category.trim().toLowerCase() === i18n(I18nKey.uncategorized).toLowerCase()
 	)
-		return url("/archive/?uncategorized=true");
-	return url(`/archive/?category=${encodeURIComponent(category.trim())}`);
+		return url("/archive/category/uncategorized/");
+	return url(`/archive/category/${encodeURIComponent(category.trim())}/`);
 }
 
 export function getDir(path: string): string {
