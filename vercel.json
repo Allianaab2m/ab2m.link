@@ -1,7 +1,12 @@
 {
-	"rewrites": [
+	"routes": [
 		{
-			"source": "/",
+			"src": "/",
+			"headers": { "Vary": "User-Agent" },
+			"continue": true
+		},
+		{
+			"src": "/",
 			"has": [
 				{
 					"type": "header",
@@ -9,13 +14,7 @@
 					"value": "(?:curl|Wget|HTTPie|xh)/.*"
 				}
 			],
-			"destination": "/index.txt"
-		}
-	],
-	"headers": [
-		{
-			"source": "/",
-			"headers": [{ "key": "Vary", "value": "User-Agent" }]
+			"dest": "/index.txt"
 		}
 	]
 }
