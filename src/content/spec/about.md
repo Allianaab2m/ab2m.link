@@ -1,41 +1,41 @@
 本名: Yuji Yoshimura
 
-高校生のときに，DiscordのBotやMinecraftのModを作ったことをきっかけにプログラミングに興味を持ちました．
+高校生のときに，DiscordのBotやMinecraftのModを作ったことをきっかけにプログラミングに興味を持ち，そこからいろいろやってます．
 
-静的型付け言語とNeovimでプログラミングするのが好きです．
+静的型付け言語とNeovimでプログラミングするのが好きです．TypeScript / Kotlin あたりをよく書いています．
 
-現在は大学で電気電子情報系の学科に所属しています．
+現在は大学で電気電子情報系の学科に所属しており，電動小型モビリティのレンタルサービスの開発を行っています．
 
-## Skills
+また，VRChat 上で「[SW_Arch ソフトウェアアーキテクチャ集会](https://vrc-ta-hub.com/community/98)」「[VRChat.ts](https://vrc-ta-hub.com/community/99)」の共同主催をやっています．
 
-### Programming Language
+## Contact
 
-- TypeScript / JavaScript
-- Python
-- Gleam
-- Kotlin
-- Java
-- Go
-- C
+[Discord: allianaab2m](https://discord.com/users/271922478182301696) に DM にて連絡いただくのが確実です
 
-::github{repo="Allianaab2m/kata-gleam"}
+が，何かとスパムがよくやってくるので，ご連絡の際は用件とともにメッセージの末尾にあなたの好きな食べ物の名前を添えてください(そうでない場合，明らかに見知った人であると同定できる要素がない限り，私はあなたのメッセージを無視するでしょう！)
 
-::github{repo="Allianaab2m/RomeChat"}
-
-### Frameworks
-
-- React
-- Next.js(App router)
-- Remix
-- Tanstack Start
-- Tailwind CSS
-- Astro
-- Prisma
+もしくは VRChat にいるときに直接話しかけるなどしてください
 
 ## Works
 
 2024/03/28~
 ::github{repo="pulsate-dev/pulsate"}
+
+2025/04/16~
+
+[eMoBi Co., Ltd.](https://emobi.co.jp)
+
+## Personal Works
+
+::github{repo="Allianaab2m/aya-orm"}
+
+::github{repo="Allianaab2m/sayo-ts"}
+
+::github{repo="emela-lang/emela"}
+
+::github{repo="Allianaab2m/kata-gleam"}
+
+::github{repo="Allianaab2m/RomeChat"}
 
 ## Keys
 
