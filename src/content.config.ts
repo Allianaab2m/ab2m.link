@@ -1,6 +1,23 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { glob } from "astro/loaders";
+import { z } from "astro/zod";
+
+/**
+ * Entry id = URL slug, same as the legacy `slug`:
+ *   posts/foo.md       -> "foo"
+ *   posts/foo/index.md -> "foo"
+ * (the default glob id keeps `/index` and lowercases, so it is set explicitly)
+ */
+function postId({ entry }: { entry: string }): string {
+	return entry.replace(/\.(md|mdx)$/, "").replace(/\/index$/, "");
+}
 
 const postsCollection = defineCollection({
+	loader: glob({
+		pattern: "**/[^_]*.{md,mdx}",
+		base: "./src/content/posts",
+		generateId: postId,
+	}),
 	schema: z.object({
 		title: z.string(),
 		published: z.date(),
@@ -20,6 +37,7 @@ const postsCollection = defineCollection({
 	}),
 });
 const specCollection = defineCollection({
+	loader: glob({ pattern: "**/[^_]*.md", base: "./src/content/spec" }),
 	schema: z.object({}),
 });
 export const collections = {

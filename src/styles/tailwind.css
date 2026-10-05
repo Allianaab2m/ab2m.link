@@ -1,0 +1,4 @@
+/* Formerly injected into every page by @astrojs/tailwind (applyBaseStyles) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

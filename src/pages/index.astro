@@ -1,5 +1,5 @@
 ---
-import { getEntry } from 'astro:content'
+import { getEntry, render } from 'astro:content'
 import { Icon } from 'astro-icon/components'
 import Footer from '@components/Footer.astro'
 import Navbar from '@components/Navbar.astro'
@@ -16,7 +16,7 @@ import { url } from '../utils/url-utils'
 
 const aboutPost = await getEntry('spec', 'about')
 if (!aboutPost) throw new Error('src/content/spec/about.md is missing')
-const { Content } = await aboutPost.render()
+const { Content } = await render(aboutPost)
 ---
 
 <Layout title={siteConfig.title} description={profileConfig.bio}>

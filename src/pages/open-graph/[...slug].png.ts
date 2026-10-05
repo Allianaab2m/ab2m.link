@@ -83,7 +83,7 @@ async function getOpenGraphData() {
         const result = posts
           .filter(({ data }) => !data.draft)
           .map(post => ({
-            params: { slug: post.slug },
+            params: { slug: post.id },
             props: {
               title: post.data.title,
               description: post.data.description,
