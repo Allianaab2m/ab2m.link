@@ -1,1 +1,21 @@
-{}
+{
+	"rewrites": [
+		{
+			"source": "/",
+			"has": [
+				{
+					"type": "header",
+					"key": "user-agent",
+					"value": "(?:curl|Wget|HTTPie|xh)/.*"
+				}
+			],
+			"destination": "/index.txt"
+		}
+	],
+	"headers": [
+		{
+			"source": "/",
+			"headers": [{ "key": "Vary", "value": "User-Agent" }]
+		}
+	]
+}
