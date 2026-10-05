@@ -7,6 +7,7 @@ import swup from "@swup/astro";
 import Compress from "astro-compress";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
+import { unified } from "@astrojs/markdown-remark";
 import { defineConfig } from "astro/config";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
@@ -34,6 +35,8 @@ export default defineConfig({
 	site: "https://ab2m.link",
 	base: "/",
 	trailingSlash: "always",
+	// Astro 7 defaults to JSX-style whitespace stripping; keep the HTML-aware behavior
+	compressHTML: true,
 	integrations: [
 		swup({
 			theme: false,
@@ -118,59 +121,63 @@ export default defineConfig({
 		}),
 	],
 	markdown: {
-		remarkPlugins: [
-			remarkMath,
-			remarkEmoji,
-			remarkReadingTime,
-			remarkExcerpt,
-			remarkGithubAdmonitionsToDirectives,
-			remarkDirective,
-			// must run before remarkSectionize: it only transforms top-level paragraphs
-			[remarkImageCaption, { className: "image-caption" }],
-			remarkSectionize,
-			parseDirectiveNode,
-			remarkBudouxExceptHeadings,
-		],
-		rehypePlugins: [
-			rehypeKatex,
-			rehypeSlug,
-			[
-				rehypeComponents,
-				{
-					components: {
-						github: GithubCardComponent,
-						note: (x, y) => AdmonitionComponent(x, y, "note"),
-						tip: (x, y) => AdmonitionComponent(x, y, "tip"),
-						important: (x, y) => AdmonitionComponent(x, y, "important"),
-						caution: (x, y) => AdmonitionComponent(x, y, "caution"),
-						warning: (x, y) => AdmonitionComponent(x, y, "warning"),
-					},
-				},
+		// Astro 7 renders Markdown with Sätteri by default; keep the remark/rehype
+		// pipeline because this site depends on unified plugins.
+		processor: unified({
+			remarkPlugins: [
+				remarkMath,
+				remarkEmoji,
+				remarkReadingTime,
+				remarkExcerpt,
+				remarkGithubAdmonitionsToDirectives,
+				remarkDirective,
+				// must run before remarkSectionize: it only transforms top-level paragraphs
+				[remarkImageCaption, { className: "image-caption" }],
+				remarkSectionize,
+				parseDirectiveNode,
+				remarkBudouxExceptHeadings,
 			],
-			[
-				rehypeAutolinkHeadings,
-				{
-					behavior: "append",
-					properties: {
-						className: ["anchor"],
-					},
-					content: {
-						type: "element",
-						tagName: "span",
-						properties: {
-							className: ["anchor-icon"],
-							"data-pagefind-ignore": true,
+			rehypePlugins: [
+				rehypeKatex,
+				rehypeSlug,
+				[
+					rehypeComponents,
+					{
+						components: {
+							github: GithubCardComponent,
+							note: (x, y) => AdmonitionComponent(x, y, "note"),
+							tip: (x, y) => AdmonitionComponent(x, y, "tip"),
+							important: (x, y) => AdmonitionComponent(x, y, "important"),
+							caution: (x, y) => AdmonitionComponent(x, y, "caution"),
+							warning: (x, y) => AdmonitionComponent(x, y, "warning"),
 						},
-						children: [
-							{
-								type: "text",
-								value: "#",
-							},
-						],
 					},
-				},
+				],
+				[
+					rehypeAutolinkHeadings,
+					{
+						behavior: "append",
+						properties: {
+							className: ["anchor"],
+						},
+						content: {
+							type: "element",
+							tagName: "span",
+							properties: {
+								className: ["anchor-icon"],
+								"data-pagefind-ignore": true,
+							},
+							children: [
+								{
+									type: "text",
+									value: "#",
+								},
+							],
+						},
+					},
+				],
 			],
-		],
+		}),
 	},
 	vite: {
 		build: {
