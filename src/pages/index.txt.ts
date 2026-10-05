@@ -5,8 +5,8 @@ import { profileConfig } from "@/config";
 /*
  * Plain-text profile for CLI HTTP clients (curl, wget, ...), in the style of
  * neofetch / fastfetch. vercel.json rewrites `/` to this file by User-Agent.
- * The avatar is drawn with half blocks (2 pixels per character) using the
- * xterm 256-color palette; everything else is ASCII.
+ * The avatar is drawn with half blocks (2 pixels per character) in 24-bit
+ * color; everything else is ASCII.
  */
 
 // must be even: each text line holds two pixel rows
@@ -17,40 +17,13 @@ const ESC = "\x1b[";
 const RESET = `${ESC}0m`;
 const BOLD = `${ESC}1m`;
 const fg = (n: number) => `${ESC}38;5;${n}m`;
-const bg = (n: number) => `${ESC}48;5;${n}m`;
-
-// xterm 256-color palette: 6x6x6 color cube (16-231) and grayscale ramp (232-255)
-const CUBE_LEVELS = [0, 95, 135, 175, 215, 255];
-
-function nearestCubeLevel(v: number): number {
-	let best = 0;
-	for (let i = 1; i < CUBE_LEVELS.length; i++) {
-		if (Math.abs(CUBE_LEVELS[i] - v) < Math.abs(CUBE_LEVELS[best] - v)) {
-			best = i;
-		}
-	}
-	return best;
-}
-
-function distance(a: number[], b: number[]): number {
-	return (a[0] - b[0]) ** 2 + (a[1] - b[1]) ** 2 + (a[2] - b[2]) ** 2;
-}
-
-function toAnsi256(r: number, g: number, b: number): number {
-	const [ri, gi, bi] = [r, g, b].map(nearestCubeLevel);
-	const cube = [CUBE_LEVELS[ri], CUBE_LEVELS[gi], CUBE_LEVELS[bi]];
-	const grayIndex = Math.min(
-		23,
-		Math.max(0, Math.round(((r + g + b) / 3 - 8) / 10)),
-	);
-	const grayLevel = 8 + grayIndex * 10;
-	const gray = [grayLevel, grayLevel, grayLevel];
-	return distance([r, g, b], cube) <= distance([r, g, b], gray)
-		? 16 + 36 * ri + 6 * gi + bi
-		: 232 + grayIndex;
-}
+const fgRgb = (r: number, g: number, b: number) => `${ESC}38;2;${r};${g};${b}m`;
+const bgRgb = (r: number, g: number, b: number) => `${ESC}48;2;${r};${g};${b}m`;
 
 async function renderAvatar(): Promise<string[]> {
+	if (!profileConfig.avatar) {
+		return [];
+	}
 	try {
 		const res = await fetch(profileConfig.avatar);
 		if (!res.ok) {
@@ -63,16 +36,16 @@ async function renderAvatar(): Promise<string[]> {
 			.raw()
 			.toBuffer({ resolveWithObject: true });
 		const lines: string[] = [];
-		const color = (x: number, y: number) => {
+		const pixel = (x: number, y: number): [number, number, number] => {
 			const i = (y * AVATAR_SIZE + x) * 3;
-			return toAnsi256(data[i], data[i + 1], data[i + 2]);
+			return [data[i], data[i + 1], data[i + 2]];
 		};
 		// One character holds two vertical pixels: upper half as the foreground
 		// of "▀", lower half as the background
 		for (let y = 0; y < AVATAR_SIZE; y += 2) {
 			let line = "";
 			for (let x = 0; x < AVATAR_SIZE; x++) {
-				line += `${fg(color(x, y))}${bg(color(x, y + 1))}▀`;
+				line += `${fgRgb(...pixel(x, y))}${bgRgb(...pixel(x, y + 1))}▀`;
 			}
 			lines.push(line + RESET);
 		}
