@@ -5,11 +5,12 @@ import { profileConfig } from "@/config";
 /*
  * Plain-text profile for CLI HTTP clients (curl, wget, ...), in the style of
  * neofetch / fastfetch. vercel.json rewrites `/` to this file by User-Agent.
- * Everything is ASCII: the avatar is drawn with background-colored spaces
- * (2 spaces per pixel) using the xterm 256-color palette.
+ * The avatar is drawn with half blocks (2 pixels per character) using the
+ * xterm 256-color palette; everything else is ASCII.
  */
 
-const AVATAR_SIZE = 18;
+// must be even: each text line holds two pixel rows
+const AVATAR_SIZE = 32;
 const BIO = "TypeScript / Neovim / Linux enthusiast.";
 
 const ESC = "\x1b[";
@@ -62,11 +63,16 @@ async function renderAvatar(): Promise<string[]> {
 			.raw()
 			.toBuffer({ resolveWithObject: true });
 		const lines: string[] = [];
-		for (let y = 0; y < AVATAR_SIZE; y++) {
+		const color = (x: number, y: number) => {
+			const i = (y * AVATAR_SIZE + x) * 3;
+			return toAnsi256(data[i], data[i + 1], data[i + 2]);
+		};
+		// One character holds two vertical pixels: upper half as the foreground
+		// of "▀", lower half as the background
+		for (let y = 0; y < AVATAR_SIZE; y += 2) {
 			let line = "";
 			for (let x = 0; x < AVATAR_SIZE; x++) {
-				const i = (y * AVATAR_SIZE + x) * 3;
-				line += `${bg(toAnsi256(data[i], data[i + 1], data[i + 2]))}  `;
+				line += `${fg(color(x, y))}${bg(color(x, y + 1))}▀`;
 			}
 			lines.push(line + RESET);
 		}
@@ -107,7 +113,7 @@ export const GET: APIRoute = async ({ site }) => {
 	const lines: string[] = [];
 	for (let i = 0; i < Math.max(avatar.length, info.length); i++) {
 		const left =
-			avatar[i] ?? (avatar.length > 0 ? " ".repeat(AVATAR_SIZE * 2) : "");
+			avatar[i] ?? (avatar.length > 0 ? " ".repeat(AVATAR_SIZE) : "");
 		lines.push(
 			`${left}${avatar.length > 0 ? gap : ""}${info[i] ?? ""}`.trimEnd(),
 		);
