@@ -1,24 +1,23 @@
 ---
-import { getCategoryList } from '@utils/content-utils'
-import MainGridLayout from '@layouts/MainGridLayout.astro'
-import ArchivePanel from '@components/ArchivePanel.astro'
-import { i18n } from '@i18n/translation'
-import I18nKey from '@i18n/i18nKey'
+import ArchivePanel from "@components/ArchivePanel.svelte";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getCategoryList, getSortedPostsList } from "@utils/content-utils";
 
+// Keep the path-based archive URLs (/archive/category/<category>/) of the old site.
+// Upstream Fuwari only has /archive/?category=<category>, which still works as well.
 export async function getStaticPaths() {
-  const categories = await getCategoryList()
-  return categories.map(category => {
-    return {
-      params: {
-        category: category.name,
-      },
-    }
-  })
+	const categories = await getCategoryList();
+	return categories
+		.filter((category) => category.name !== i18n(I18nKey.uncategorized))
+		.map((category) => ({ params: { category: category.name } }));
 }
 
-const category = Astro.params.category as string
+const category = Astro.params.category as string;
+const sortedPostsList = await getSortedPostsList();
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)} description={i18n(I18nKey.archive)}>
-    <ArchivePanel categories={[category]}></ArchivePanel>
+    <ArchivePanel sortedPosts={sortedPostsList} categories={[category]} client:only="svelte"></ArchivePanel>
 </MainGridLayout>

@@ -1,5 +1,5 @@
 ---
-import { getEntry } from 'astro:content'
+import { getEntry, render } from 'astro:content'
 import { Icon } from 'astro-icon/components'
 import Footer from '@components/Footer.astro'
 import Navbar from '@components/Navbar.astro'
@@ -15,7 +15,8 @@ import { i18n } from '../i18n/translation'
 import { url } from '../utils/url-utils'
 
 const aboutPost = await getEntry('spec', 'about')
-const { Content } = await aboutPost.render()
+if (!aboutPost) throw new Error('src/content/spec/about.md is missing')
+const { Content } = await render(aboutPost)
 ---
 
 <Layout title={siteConfig.title} description={profileConfig.bio}>
@@ -73,7 +74,7 @@ const { Content } = await aboutPost.render()
                         <Icon name="fa6-regular:address-card" class="text-[1.5rem] text-[var(--primary)]"></Icon>
                         <h2 class="text-2xl font-bold text-90 transition">{i18n(I18nKey.about)}</h2>
                     </div>
-                    <Markdown>
+                    <Markdown class="">
                         <Content />
                     </Markdown>
                 </div>

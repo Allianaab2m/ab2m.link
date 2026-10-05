@@ -1,32 +1,21 @@
 ---
-import { getSortedPosts } from '@utils/content-utils'
-import MainGridLayout from '@layouts/MainGridLayout.astro'
-import ArchivePanel from '@components/ArchivePanel.astro'
-import { i18n } from '@i18n/translation'
-import I18nKey from '@i18n/i18nKey'
+import ArchivePanel from "@components/ArchivePanel.svelte";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getSortedPostsList, getTagList } from "@utils/content-utils";
 
+// Keep the path-based archive URLs (/archive/tag/<tag>/) of the old site.
+// Upstream Fuwari only has /archive/?tag=<tag>, which still works as well.
 export async function getStaticPaths() {
-  let posts = await getSortedPosts()
-
-  const allTags = posts.reduce((acc, post) => {
-    post.data.tags.forEach(tag => acc.add(tag))
-    return acc
-  }, new Set())
-
-  const allTagsArray = Array.from(allTags)
-
-  return allTagsArray.map(tag => {
-    return {
-      params: {
-        tag: tag,
-      },
-    }
-  })
+	const tags = await getTagList();
+	return tags.map((tag) => ({ params: { tag: tag.name } }));
 }
 
-const tag = Astro.params.tag as string
+const tag = Astro.params.tag as string;
+const sortedPostsList = await getSortedPostsList();
 ---
 
 <MainGridLayout title={i18n(I18nKey.archive)} description={i18n(I18nKey.archive)}>
-    <ArchivePanel tags={[tag]}></ArchivePanel>
+    <ArchivePanel sortedPosts={sortedPostsList} tags={[tag]} client:only="svelte"></ArchivePanel>
 </MainGridLayout>

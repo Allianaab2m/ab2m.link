@@ -1,4 +1,4 @@
-import type { APIContext, ImageMetadata, InferGetStaticPropsType } from 'astro'
+import type { APIContext, InferGetStaticPropsType } from 'astro'
 import satori, { type SatoriOptions } from 'satori'
 import { html } from 'satori-html'
 import { getCollection } from 'astro:content'
@@ -35,7 +35,7 @@ const markup = (
   title: string,
   published: Date,
   description?: string,
-  category?: string,
+  category?: string | null,
   tags?: string[],
 ) =>
   /* Satori uses tailwind! Create or view a desing using https://og-playground.vercel.app/ */
@@ -71,7 +71,7 @@ async function getOpenGraphData() {
         )
         const png = new Resvg(svg).render().asPng()
 
-        return new Response(png, {
+        return new Response(new Uint8Array(png), {
           headers: {
             'Content-Type': 'image/png',
             'Cache-Control': 'public, max-age=31536000, immutable',
@@ -83,7 +83,7 @@ async function getOpenGraphData() {
         const result = posts
           .filter(({ data }) => !data.draft)
           .map(post => ({
-            params: { slug: post.slug },
+            params: { slug: post.id },
             props: {
               title: post.data.title,
               description: post.data.description,

@@ -1,13 +1,20 @@
 {
-  "headers": [
-    {
-      "source": "/.well-known/nostr.json",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    }
-  ]
+	"routes": [
+		{
+			"src": "/",
+			"headers": { "Vary": "User-Agent" },
+			"continue": true
+		},
+		{
+			"src": "/",
+			"has": [
+				{
+					"type": "header",
+					"key": "user-agent",
+					"value": "(?:curl|Wget|HTTPie|xh)/.*"
+				}
+			],
+			"dest": "/index.txt"
+		}
+	]
 }

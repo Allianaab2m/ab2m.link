@@ -1,0 +1,17 @@
+/*
+ * Global stylesheet, imported by Layout.astro.
+ *
+ * Upstream Fuwari never imports src/styles/*: they only reached the bundle
+ * because ImageWrapper globbed every file under src/ ("../../**"). That stopped
+ * working with Vite 8 (each file was processed on its own, so `@apply link` in
+ * markdown.css could not see `.link` from main.css), so they are bundled here
+ * explicitly. This also replaces the base styles @astrojs/tailwind injected.
+ */
+@import "./_tailwind-base.css";
+@import "./main.css";
+@import "./markdown.css";
+@import "./expressive-code.css";
+@import "./photoswipe.css";
+@import "./scrollbar.css";
+@import "./transition.css";
+@import "./_tailwind-utilities.css";
