@@ -1,0 +1,21 @@
+---
+import ArchivePanel from "@components/ArchivePanel.svelte";
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getSortedPostsList, getTagList } from "@utils/content-utils";
+
+// Keep the path-based archive URLs (/archive/tag/<tag>/) of the old site.
+// Upstream Fuwari only has /archive/?tag=<tag>, which still works as well.
+export async function getStaticPaths() {
+	const tags = await getTagList();
+	return tags.map((tag) => ({ params: { tag: tag.name } }));
+}
+
+const tag = Astro.params.tag as string;
+const sortedPostsList = await getSortedPostsList();
+---
+
+<MainGridLayout title={i18n(I18nKey.archive)} description={i18n(I18nKey.archive)}>
+    <ArchivePanel sortedPosts={sortedPostsList} tags={[tag]} client:only="svelte"></ArchivePanel>
+</MainGridLayout>

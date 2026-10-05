@@ -7,6 +7,7 @@ import I18nKey from '../i18n/i18nKey'
 import Markdown from '@components/misc/Markdown.astro'
 
 const privacyPolicyPost = await getEntry('spec', 'privacypolicy')
+if (!privacyPolicyPost) throw new Error('src/content/spec/privacypolicy.md is missing')
 
 const { Content } = await privacyPolicyPost.render()
 ---
