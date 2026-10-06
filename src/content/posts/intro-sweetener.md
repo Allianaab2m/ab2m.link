@@ -159,7 +159,10 @@ TC39 で提案されている Hack スタイル(`x |> f(%)` のように `%` で
   - `handle f() { errors }` を `Effect.catchTag` にする
 - Drizzle のテーブル定義 DSL
 
-などがあり，Effect-TS, Drizzle ユーザーとしてはかなり魅力的に見えました．
+などがあり，Effect-TS, Drizzle ユーザー[^2]としてはかなり魅力的に見えました．
+
+[^2]: こんなツイートをしていたりします
+    <blockquote class="twitter-tweet"><p lang="und" dir="ltr">I ❤ <a href="https://x.com/EffectTS_?ref_src=twsrc%5Etfw">@EffectTS_</a> &amp; <a href="https://x.com/DrizzleORM?ref_src=twsrc%5Etfw">@DrizzleORM</a> !<a href="https://x.com/hashtag/Kirisame3D?src=hash&amp;ref_src=twsrc%5Etfw">#Kirisame3D</a> <a href="https://t.co/ZIzYb0MX89">pic.twitter.com/ZIzYb0MX89</a></p>&mdash; ありあな (@Alliana_VRC) <a href="https://x.com/Alliana_VRC/status/2086116908747882886?ref_src=twsrc%5Etfw">August 8, 2026</a></blockquote> <script async src="https://platform.x.com/widgets.js" charset="utf-8"></script>
 
 Effect-TS は特にボイラープレートが多く，読むのが結構つらいので，これらのマクロでコードレビュー時の読みづらさが軽減されるのではないかと期待していたり．
 
