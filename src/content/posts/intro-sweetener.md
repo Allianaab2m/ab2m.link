@@ -13,9 +13,9 @@ lang: "ja"
 
 ですが TC39 の [proposal-pipeline-operator](https://github.com/tc39/proposal-pipeline-operator) は Stage 2 から一向に動く気配を見せません．
 
-これでは困りましたね．敬虔な関数型言語信者のみなさんであれば，パイプライン演算子のない世界のコードを読むのが辛いということを知っているはずです．
+これでは困りましたね．敬虔な関数型言語信者のみなさんであれば，パイプライン演算子のない世界のコードを書いたり読んだりするのが辛いということを知っているはずです．
 
-現に TypeScript ではパイプライン演算子が無いために，こんなことをしています．なんてことでしょう．
+現に TypeScript ではパイプライン演算子が無いために，こんなことをしています．**なんということでしょう．**
 
 ```ts
 // 内側から外側へ読む
@@ -29,9 +29,11 @@ pipe(
 );
 ```
 
-かたやお隣，とは言い難いですが Rust に目を向けると `macro_rules!` なるマクロ展開がサポートされているではありませんか．TypeScript にこういう仕組みがあれば構文拡張もできそうですね．
+かたやお隣，とは言い難いですが Rust に目を向けると `macro_rules!` なるマクロ展開がサポートされているではありませんか．TypeScript にもこういう仕組みがあれば構文拡張もできそうですね．
 
-それが今回紹介する [Sweetener](https://sweetener-ts.github.io) です．
+......え，あるんですか？
+
+**あるみたいですよ．** それが今回紹介する [Sweetener](https://sweetener-ts.github.io) です．
 
 ---
 
@@ -39,9 +41,16 @@ pipe(
 
 Sweetener はマクロを定義・使用するための独自構文 `.sts` から `.ts` を生成するためのライブラリ・ビルドツールです．
 
+とりあえずインストールしましょう．
+
+```bash
+npm install --save-dev @sweetener/cli
+npx sweetener init
+```
+
 試しに，Ruby の `unless` を定義してみます．`if` と逆の動作をします．
 
-```ts macros.sts
+```ts title="macros.sts"
 export syntax unless:stmt {
     rule { unless ($condition:expr) { $($body:stmt)* } } => {
         if (!($condition)) { $($body)* }
@@ -51,7 +60,7 @@ export syntax unless:stmt {
 
 このようにして定義したマクロは以下のように使うことができます．
 
-```ts main.sts
+```ts title="main.sts"
 import { unless } from "./macros.sts" for syntax;
 
 export function withdraw(balance: number, amount: number): string {
@@ -63,6 +72,12 @@ export function withdraw(balance: number, amount: number): string {
 ```
 
 これは単純な TypeScript コードに展開され，以下のようなコードになります．
+
+展開には以下のコマンドを使います．
+
+```bash
+npx sweetener expand src/main.sts
+```
 
 ```ts
 export function withdraw(balance: number, amount: number): string {
@@ -100,7 +115,7 @@ export syntax unless:stmt {
 
 [^1]: 左辺の評価結果を，右辺の関数の第一引数に暗黙的に渡すスタイル．
 
-```ts operators.sts
+```ts title="operators.sts"
 export operator (|>):expr {
     fixity infix;
     associativity left;
@@ -116,7 +131,7 @@ export operator (|>):expr {
 }
 ```
 
-```ts main.sts
+```ts title="main.sts"
 import { (|>) } from "./operators.sts" for syntax;
 
 const result = [1, 2, 3] |> map((n) => n * 2) |> sum;
