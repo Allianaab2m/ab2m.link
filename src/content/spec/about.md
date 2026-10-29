@@ -41,17 +41,11 @@
 
 ### SSH
 
-Public key
-
-`ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFLmR7uSY/Aj8w5VeojtLp8w0ba4tQnUIOzoe8GMkvsM`
-
-Fingerprint
-
-`Hs+Cktwz7OamzvP++egTOQfAD5vndGKcT7QBAC3jbgM`
+https://github.com/Allianaab2m.keys
 
 ### OpenPGP
 
-<a href="https://ab2m.link/pub.asc" download><code>BE93 7556 2F46 135A 855D F10C 690B 82B2 B500 ABE1</code></a>
+<a href="https://ab2m.link/pub.asc" download><code>AC18 34FA D1D3 9235 4BE6 E223 BD28 E3FF 1A11 AAB2</code></a>
 
 ### nostr
 
